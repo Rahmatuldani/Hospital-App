@@ -9,7 +9,9 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "e2e:show": "npx playwright show-report",
+    "e2e": "npx playwright test --reporter=html && npm run e2e:show"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -17,6 +19,7 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.42.1",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
     "@types/jest": "^29.5.12",
