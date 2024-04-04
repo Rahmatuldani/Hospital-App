@@ -20,7 +20,7 @@ function Login(): React.ReactNode {
 
     const FormSubmit: SubmitHandler<FormData> = function(data) {
         console.log(data);
-    }
+    };
 
     return (
         <div id='layoutAuthentication'>
@@ -98,7 +98,7 @@ function Login(): React.ReactNode {
                     <Container fluid>
                         <Row>
                             <Col md={6} className='small'>
-                                Copyright &#xA9; Rahmatul Ramadhani 2024
+                                Copyright &#xA9; Hospital App 2024
                             </Col>
                             <Col md={6} className='text-md-right small'>
                                 <a href='#!'>Privacy Policy</a>
