@@ -11,7 +11,9 @@ function AdminLayout() {
                 <Sidebar items={<SidebarItems/>} role='Administrator'/>
             </div>
             <div id="layoutSidenav_content">
-                <Outlet />
+                <React.Suspense fallback={<div>Loading...</div>}>
+                    <Outlet />
+                </React.Suspense>
                 <footer className="footer mt-auto footer-light">
                     <div className="container-fluid">
                         <div className="row">

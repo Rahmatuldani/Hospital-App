@@ -26,14 +26,14 @@ function RouteRedirect() {
 
 const Routers = createBrowserRouter(
     createRoutesFromElements(
-        <Route errorElement={<ErrorBoundary/>}>
-            <Route path="/" element={<App/>}>
+        <>
+            <Route path="/" element={<App/>} errorElement={<ErrorBoundary/>}>
                 <Route index element={<RouteRedirect/>}/>
                 {AdminRouters()}
             </Route>
             <Route path="/login" element={<Login/>}/>
             <Route path='*' element={<NotFoundPage/>}/>
-        </Route>
+        </>
     )
 );
 

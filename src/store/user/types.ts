@@ -7,7 +7,7 @@ export type UserType = {
     genre: string;
     address: string;
     phone: string;
-    photo?: string;
+    photo?: string | null;
 }
 
 export const UserRole = [
