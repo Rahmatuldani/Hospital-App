@@ -4,20 +4,13 @@ import { UserType } from '../../../store/user/types';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { FiTrash2 } from 'react-icons/fi';
 import { FaSortDown } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { selectUsers } from '../../../store/user/selector';
+import useState from '../../../hooks/useState';
 
 function Users() {
-    const users: UserType[] = [
-        {
-            _id: '1',
-            address: 'Testing address',
-            email: 'testing@gmail.com',
-            genre: 'Laki-laki',
-            name: 'Testing',
-            phone: '08123456789',
-            role: 'Administrator',
-            photo: null
-        }
-    ];
+    const users: UserType[] = useSelector(selectUsers);
+    const [filter, setFilter] = useState<string>('');
 
     const columns: TableColumn<UserType>[] = [
         {
@@ -28,6 +21,11 @@ function Users() {
         {
             name: 'Name',
             selector: row => row.name,
+            sortable: true
+        },
+        {
+            name: 'Email',
+            selector: row => row.email,
             sortable: true
         },
         {
@@ -48,6 +46,11 @@ function Users() {
             )
         },
     ];
+
+    const filterUsers: UserType[] = users.filter((user) => user.email.toLowerCase().includes(filter.toLowerCase()) || 
+        user._id.includes(filter) || user.name.toLowerCase().includes(filter.toLowerCase())
+    );
+
     return (
         <main>
             <header className="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
@@ -70,12 +73,12 @@ function Users() {
                 <Card className='mb-4 card-header-actions'>
                     <Card.Header>
                         List
-                        <Form.Control style={{ maxWidth: '400px' }} placeholder="Search" onChange={(e) => console.log(e)} />
+                        <Form.Control style={{ maxWidth: '400px' }} placeholder="Search" onChange={(e) => setFilter(e.target.value)} />
                     </Card.Header>
                     <Card.Body>
                         <DataTable
                             columns={columns}
-                            data={users}
+                            data={filterUsers}
                             pagination
                             sortIcon={<FaSortDown/>}
                             responsive

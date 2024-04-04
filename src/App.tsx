@@ -1,7 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-
-const NavbarComponent = React.lazy(() => import('./components/navbar'));
+import NavbarComponent from './components/navbar';
 
 function App() {
     document.body.className = 'nav-fixed';
@@ -9,7 +8,9 @@ function App() {
     return (
         <>
             <NavbarComponent/>
-            <Outlet/>
+            <React.Suspense fallback={<div>Loading...</div>}>
+                <Outlet/>
+            </React.Suspense>
         </>
     );
 }
