@@ -1,0 +1,62 @@
+[
+    {
+        "_id": "HzWDPqd50R8BubZ0sGfa3iis",
+        "name": "Administrator",
+        "email": "admin@gmail.com",
+        "role": "Administrator",
+        "polyclinic": null,
+        "gender": "Male",
+        "address": null,
+        "phone": "08123456789"
+    },
+    {
+        "_id": "19CJ1sGUf1mdFo1ozVOjE7aw",
+        "name": "Receptionist",
+        "email": "receptionist@gmail.com",
+        "role": "Receptionist",
+        "polyclinic": null,
+        "gender": "Female",
+        "address": null,
+        "phone": "08123456789"
+    },
+    {
+        "_id": "bzxGZv37qBewIL4ey4KHMjLO",
+        "name": "Doctor",
+        "email": "doctor@gmail.com",
+        "role": "Doctor",
+        "polyclinic": null,
+        "gender": "Female",
+        "address": null,
+        "phone": "08123456789"
+    },
+    {
+        "_id": "LznDBCu549Dvx0wfWrPhBYRr",
+        "name": "Logistic",
+        "email": "logistic@gmail.com",
+        "role": "Logistic",
+        "polyclinic": null,
+        "gender": "Male",
+        "address": null,
+        "phone": "08123456789"
+    },
+    {
+        "_id": "ugS9GvgXceCqYqqpx2DBAg7t",
+        "name": "Pharmacist",
+        "email": "pharmacist@gmail.com",
+        "role": "Pharmacist",
+        "polyclinic": null,
+        "gender": "Male",
+        "address": null,
+        "phone": "08123456789"
+    },
+    {
+        "_id": "docfA7dBYHg1141JCT4Tju47",
+        "name": "Cashier",
+        "email": "cashier@gmail.com",
+        "role": "Cashier",
+        "polyclinic": null,
+        "gender": "Female",
+        "address": null,
+        "phone": "08123456789"
+    }
+]

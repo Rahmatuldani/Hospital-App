@@ -4,7 +4,6 @@ import NavbarComponent from './components/navbar';
 
 function App() {
     document.body.className = 'nav-fixed';
-
     return (
         <>
             <NavbarComponent/>

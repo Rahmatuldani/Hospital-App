@@ -1,8 +1,8 @@
 import SyncLoader from 'react-spinners/SyncLoader';
 
-function LoadinComponent() {
+function LoadingComponent() {
     return (
-        <div style={{ width: '100%', height: '100%'}} className='d-flex justify-content-center align-items-center'>
+        <div style={{ width: '100%', height: '100%', padding: '1rem'}} className='d-flex justify-content-center align-items-center'>
             <SyncLoader
                 color='grey'
                 loading={true}
@@ -13,4 +13,4 @@ function LoadinComponent() {
     );
 }
 
-export default LoadinComponent;
+export default LoadingComponent;

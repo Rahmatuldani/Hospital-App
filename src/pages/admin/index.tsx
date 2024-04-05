@@ -1,18 +1,22 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import LoadinComponent from '../../components/loading';
+import LoadingComponent from '../../components/loading';
+import { FetchUsersFunction } from '../../store/user/action';
 
 const Sidebar = React.lazy(() => import('../../components/sidebar'));
 const SidebarItems = React.lazy(() => import('./sidebar'));
 
 function AdminLayout() {
+    React.useEffect(() => {
+        FetchUsersFunction();
+    }, []);
     return (
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <Sidebar items={<SidebarItems/>} role='Administrator'/>
             </div>
             <div id="layoutSidenav_content">
-                <React.Suspense fallback={<LoadinComponent/>}>
+                <React.Suspense fallback={<LoadingComponent/>}>
                     <Outlet />
                 </React.Suspense>
                 <footer className="footer mt-auto footer-light">

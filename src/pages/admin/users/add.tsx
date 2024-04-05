@@ -97,27 +97,27 @@ function AddUser() {
                                 <Controller
                                     control={control}
                                     name='gender'
-                                    defaultValue='Laki-laki'
+                                    defaultValue='Male'
                                     render={({ field: {value, onChange} }) => (
                                         <Form.Group as={Col} className='mb-2' controlId='inputGender'>
                                             <Row>
                                                 <Form.Label column sm={2} className='small mb-1'>Gender</Form.Label>
                                                 <Col sm={10}>
                                                     <Form.Check
-                                                        label='Laki-laki'
+                                                        label='Male'
                                                         name='gender'
                                                         type='radio'
                                                         id='inline-radio-1'
-                                                        checked={value === 'Laki-laki'}
-                                                        onChange={() => onChange('Laki-laki')}
+                                                        checked={value === 'Male'}
+                                                        onChange={() => onChange('Male')}
                                                     />
                                                     <Form.Check
-                                                        label='Perempuan'
+                                                        label='Female'
                                                         name='gender'
                                                         type='radio'
                                                         id='inline-radio-2'
-                                                        checked={value === 'Perempuan'}
-                                                        onChange={() => onChange('Perempuan')}
+                                                        checked={value === 'Female'}
+                                                        onChange={() => onChange('Female')}
                                                     />
                                                 </Col>
                                             </Row>

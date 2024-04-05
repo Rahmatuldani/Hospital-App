@@ -1,15 +1,11 @@
 export enum USERS_ACTION_TYPES {
-    CREATE_USERS_START = 'users/CREATE_USERS_START',
-    CREATE_USERS_SUCCESS = 'users/CREATE_USERS_SUCCESS',
-    CREATE_USERS_FAILED = 'users/CREATE_USERS_FAILED',
-    
-    UPDATE_USERS_START = 'users/UPDATE_USERS_START',
-    UPDATE_USERS_SUCCESS = 'users/UPDATE_USERS_SUCCESS',
-    UPDATE_USERS_FAILED = 'users/UPDATE_USERS_FAILED',
+    REDUCER_LOADING = 'users/REDUCER_LOADING',
+    REDUCER_ERROR = 'users/REDUCER_ERROR',
 
-    DELETE_USERS_START = 'users/DELETE_USERS_START',
-    DELETE_USERS_SUCCESS = 'users/DELETE_USERS_SUCCESS',
-    DELETE_USERS_FAILED = 'users/DELETE_USERS_FAILED',
+    FETCH_USERS = 'users/FETCH_USERS',
+    CREATE_USERS = 'users/CREATE_USERS',
+    UPDATE_USERS = 'users/UPDATE_USERS',
+    DELETE_USERS = 'users/DELETE_USERS',
 }
 
 export type UserType = {
@@ -21,7 +17,6 @@ export type UserType = {
     gender: string;
     address?: string | null;
     phone: string;
-    photo?: string | null;
 }
 
 export const UserRole = [

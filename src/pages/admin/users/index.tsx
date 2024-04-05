@@ -5,15 +5,17 @@ import DataTable, { TableColumn } from 'react-data-table-component';
 import { FiTrash2 } from 'react-icons/fi';
 import { FaEdit, FaSortDown } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import { selectUsers } from '../../../store/user/selector';
+import { selectUsers, selectUsersIsLoading } from '../../../store/user/selector';
 import useState from '../../../hooks/useState';
 import Alert from '../../../utils/alert';
 import { DeleteUserFunction } from '../../../store/user/action';
 import UserDetail from './detail';
 import { useNavigate } from 'react-router-dom';
+import LoadingComponent from '../../../components/loading';
 
 function Users() {
     const users: UserType[] = useSelector(selectUsers);
+    const loading = useSelector(selectUsersIsLoading);
     const [filter, setFilter] = useState<string>('');
     const navigate = useNavigate();
 
@@ -116,15 +118,19 @@ function Users() {
                         <Form.Control style={{ maxWidth: '400px' }} placeholder='Search' onChange={(e) => setFilter(e.target.value)} />
                     </Card.Header>
                     <Card.Body>
-                        <DataTable
-                            columns={columns}
-                            data={filterUsers}
-                            pagination
-                            sortIcon={<FaSortDown/>}
-                            responsive
-                            striped
-                            highlightOnHover
-                        />
+                        {loading ? (
+                            <LoadingComponent/>
+                        ) : (
+                            <DataTable
+                                columns={columns}
+                                data={filterUsers}
+                                pagination
+                                sortIcon={<FaSortDown/>}
+                                responsive
+                                striped
+                                highlightOnHover
+                            />
+                        )}
                     </Card.Body>
                 </Card>
             </Container>
