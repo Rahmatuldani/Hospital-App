@@ -3,16 +3,19 @@ import { FaUserDoctor } from 'react-icons/fa6';
 import { UserType } from '../../../store/user/types';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { FiTrash2 } from 'react-icons/fi';
-import { FaSortDown } from 'react-icons/fa';
+import { FaEdit, FaSortDown } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { selectUsers } from '../../../store/user/selector';
 import useState from '../../../hooks/useState';
 import Alert from '../../../utils/alert';
 import { DeleteUserFunction } from '../../../store/user/action';
+import UserDetail from './detail';
+import { useNavigate } from 'react-router-dom';
 
 function Users() {
     const users: UserType[] = useSelector(selectUsers);
     const [filter, setFilter] = useState<string>('');
+    const navigate = useNavigate();
 
     function handleDelete(id: string, name: string) {
         Alert({ title: 'Delete user', text: `Are you sure to delete ${name}?`, icon: 'warning', cancelButton: true, confirmText: 'Delete' })
@@ -57,6 +60,18 @@ function Users() {
             name: 'Action',
             cell: (row) => (
                 <div className='d-flex gap-1'>
+                    <UserDetail user={row}/>
+
+                    <OverlayTrigger
+                        placement='top'
+                        overlay={
+                            <Tooltip id='editTooltip'>Edit</Tooltip>
+                        }
+                    >
+                        <Button variant='icon' className='btn-transparent-dark btn-datatable' onClick={() => navigate(`/administrator/users/edit/${row._id}`)}>
+                            <FaEdit />
+                        </Button>
+                    </OverlayTrigger>
                     <OverlayTrigger
                         placement='top'
                         overlay={

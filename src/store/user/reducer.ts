@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { createUserFailed, createUserStart, createUserSuccess, deleteUserFailed, deleteUserStart, deleteUserSuccess } from './action';
+import { createUserFailed, createUserStart, createUserSuccess, deleteUserFailed, deleteUserStart, deleteUserSuccess, updateUserFailed, updateUserStart, updateUserSuccess } from './action';
 import { UserType } from './types';
 
 export type UsersState = {
@@ -31,6 +31,7 @@ export function usersReducer(
 ): UsersState {
     if (
         createUserStart.match(action) ||
+        updateUserStart.match(action) ||
         deleteUserStart.match(action)
     ){
         return {...state, isLoading: true};
@@ -39,6 +40,15 @@ export function usersReducer(
     if (createUserSuccess.match(action)) {
         return {...state, isLoading: false, users: [...state.users, action.payload], error: null};
     }
+    if (updateUserSuccess.match(action)) {
+        const updateUsers = state.users.map((user) => {
+            if (user._id === action.payload._id) {
+                return action.payload;
+            }
+            return user;
+        });
+        return {...state, isLoading: false, users: updateUsers, error: null};
+    }
     if (deleteUserSuccess.match(action)) {
         const newUsers = state.users.filter(user => user._id !== action.payload);
         return {...state, isLoading: false, users: newUsers, error: null};
@@ -46,6 +56,7 @@ export function usersReducer(
 
     if (
         createUserFailed.match(action) ||
+        updateUserFailed.match(action) ||
         deleteUserFailed.match(action)
     ) {
         return {...state, isLoading: false, error: action.payload};

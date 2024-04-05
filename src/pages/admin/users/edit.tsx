@@ -2,21 +2,25 @@ import { Button, Card, Col, Container, Form, Row, Spinner } from 'react-bootstra
 import { FaUserDoctor } from 'react-icons/fa6';
 import { Polyclinic, UserRole, UserType } from '../../../store/user/types';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { CreateUserFunction } from '../../../store/user/action';
+import { UpdateUserFunction } from '../../../store/user/action';
 import Alert from '../../../utils/alert';
 import { useSelector } from 'react-redux';
-import { selectUsersIsLoading } from '../../../store/user/selector';
-import { useNavigate } from 'react-router-dom';
+import { selectUsersById, selectUsersIsLoading } from '../../../store/user/selector';
+import { useNavigate, useParams } from 'react-router-dom';
 import { EmptyToNull } from '../../../utils/convert';
 
-function AddUser() {
-    const { handleSubmit, control, formState: { errors } } = useForm<UserType>();
+
+function EditUser() {
+    const { id } = useParams();
+    const user = useSelector(selectUsersById(id ?? '0'));
+    const { handleSubmit, control, formState: { errors } } = useForm<UserType>({ defaultValues: user});
     const loading = useSelector(selectUsersIsLoading);
     const navigate = useNavigate();
 
     const FormSubmit: SubmitHandler<UserType> = (data) => {
         const formData = EmptyToNull(data);
-        CreateUserFunction(formData as UserType)
+        
+        UpdateUserFunction(formData as UserType)
             .then(result => {
                 Alert({
                     title: 'Success',
@@ -57,7 +61,7 @@ function AddUser() {
             </header>
             <Container className='mt-n10'>
                 <Card className='mb-4'>
-                    <Card.Header>Add</Card.Header>
+                    <Card.Header>Edit</Card.Header>
                     <Card.Body>
                         <Form onSubmit={handleSubmit(FormSubmit)}>
                             <Row className='mb-3'>
@@ -68,7 +72,6 @@ function AddUser() {
                                         required: 'Email is required',
                                         pattern: { value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, message: 'Input must be email' }
                                     }}
-                                    defaultValue=''
                                     render={({ field }) => (
                                         <Form.Group as={Col} className='mb-2' controlId='inputEmail'>
                                             <Form.Label className='small mb-1'>Email</Form.Label>
@@ -83,7 +86,6 @@ function AddUser() {
                                     rules={{
                                         required: 'Name is required',
                                     }}
-                                    defaultValue=''
                                     render={({ field }) => (
                                         <Form.Group as={Col} className='mb-2' controlId='inputName'>
                                             <Form.Label className='small mb-1'>Name</Form.Label>
@@ -97,7 +99,6 @@ function AddUser() {
                                 <Controller
                                     control={control}
                                     name='gender'
-                                    defaultValue='Laki-laki'
                                     render={({ field: {value, onChange} }) => (
                                         <Form.Group as={Col} className='mb-2' controlId='inputGender'>
                                             <Row>
@@ -127,7 +128,6 @@ function AddUser() {
                                 <Controller
                                     control={control}
                                     name='address'
-                                    defaultValue=''
                                     render={({ field: { onChange, onBlur, value } }) => (
                                         <Form.Group as={Col} className='mb-2' controlId='inputAddress'>
                                             <Form.Label className='small mb-1'>Address</Form.Label>
@@ -143,7 +143,6 @@ function AddUser() {
                                     rules={{
                                         required: 'Role is required'
                                     }}
-                                    defaultValue=''
                                     render={({field}) => (
                                         <Form.Group as={Col} className='mb-2' controlId='inputRole'>
                                             <Form.Label className='small mb-1'>Role</Form.Label>
@@ -160,7 +159,6 @@ function AddUser() {
                                 <Controller
                                     control={control}
                                     name='polyclinic'
-                                    defaultValue=''
                                     render={({ field: { onChange, onBlur, value}}) => (
                                         <Form.Group as={Col} className='mb-2' controlId='inputPolyclinic'>
                                             <Form.Label className='small mb-1'>Polyclinic</Form.Label>
@@ -181,7 +179,6 @@ function AddUser() {
                                     rules={{
                                         required: 'Phone is required',
                                     }}
-                                    defaultValue=''
                                     render={({field}) => (
                                         <Form.Group as={Col} sm={6} className='mb-2' controlId='inputPhone'>
                                             <Form.Label className='small mb-1'>Phone</Form.Label>
@@ -206,4 +203,4 @@ function AddUser() {
     );
 }
 
-export default AddUser;
+export default EditUser;

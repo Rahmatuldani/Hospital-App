@@ -9,6 +9,11 @@ export const selectUsers = createSelector(
     (usersSlice) => usersSlice.users
 );
 
+export const selectUsersById = (id: string) => createSelector(
+    [selectUsersReducer],
+    (usersSlice) => usersSlice.users.find(user => user._id === id)
+);
+
 export const selectUsersIsLoading = createSelector(
     [selectUsersReducer],
     (usersSlice) => usersSlice.isLoading

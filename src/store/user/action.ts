@@ -39,6 +39,42 @@ export function CreateUserFunction(user: UserType): Promise<string> {
 }
 // End Create User
 
+// Begin Update User
+export type UpdateUserStart = ActionWithPayload<USERS_ACTION_TYPES.UPDATE_USERS_START, UserType>;
+export const updateUserStart = withMatcher(
+    (user: UserType): UpdateUserStart => createAction(USERS_ACTION_TYPES.UPDATE_USERS_START, user)
+);
+
+export type UpdateUserSuccess = ActionWithPayload<USERS_ACTION_TYPES.UPDATE_USERS_SUCCESS, UserType>;
+export const updateUserSuccess = withMatcher(
+    (user: UserType): UpdateUserSuccess => createAction(USERS_ACTION_TYPES.UPDATE_USERS_SUCCESS, user)
+);
+
+export type UpdateUserFailed = ActionWithPayload<USERS_ACTION_TYPES.UPDATE_USERS_FAILED, Error>;
+export const updateUserFailed = withMatcher(
+    (error: Error): UpdateUserFailed => createAction(USERS_ACTION_TYPES.UPDATE_USERS_FAILED, error)
+);
+
+export function UpdateUserFunction(user: UserType): Promise<string> {
+    store.dispatch(updateUserStart(user));
+
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const result = 10 + 60;
+            if (result === 70) {
+                store.dispatch(updateUserSuccess(user));
+    
+                return resolve('Update user success');
+            }
+    
+            const error: Error = new Error('Update user failed');
+            store.dispatch(updateUserFailed(error));
+            return reject(error);
+        }, 1000);
+    });
+}
+// End Update User
+
 // Begin Delete User
 export type DeleteUserStart = ActionWithPayload<USERS_ACTION_TYPES.DELETE_USERS_START, string>;
 export const deleteUserStart = withMatcher(
