@@ -1,11 +1,21 @@
+export enum USERS_ACTION_TYPES {
+    CREATE_USERS_START = 'users/CREATE_USERS_START',
+    CREATE_USERS_SUCCESS = 'users/CREATE_USERS_SUCCESS',
+    CREATE_USERS_FAILED = 'users/CREATE_USERS_FAILED',
+
+    DELETE_USERS_START = 'users/DELETE_USERS_START',
+    DELETE_USERS_SUCCESS = 'users/DELETE_USERS_SUCCESS',
+    DELETE_USERS_FAILED = 'users/DELETE_USERS_FAILED',
+}
+
 export type UserType = {
     _id: string;
     name: string;
     email: string;
     role: string;
-    polyclinic?: string;
-    genre: string;
-    address: string;
+    polyclinic?: string | null;
+    gender: string;
+    address?: string | null;
     phone: string;
     photo?: string | null;
 }

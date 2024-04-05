@@ -34,6 +34,7 @@ function SidebarItems() {
             <Collapse in={collapseEl === 'users'}>
                 <Nav as='nav' className='sidenav-menu-nested accordion'>
                     <NavLink to={'/administrator/users'} role='button' className='nav-link' tabIndex={0} end>List</NavLink>
+                    <NavLink to={'/administrator/users/add'} role='button' className='nav-link' tabIndex={0} end>Add</NavLink>
                 </Nav>
             </Collapse>
         </Nav>

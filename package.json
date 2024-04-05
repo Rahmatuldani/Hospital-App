@@ -46,6 +46,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "jest-environment-jsdom": "^29.7.0",
+    "react-spinners": "^0.13.8",
+    "sweetalert2": "^11.10.7",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.2.2",

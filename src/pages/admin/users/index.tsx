@@ -7,10 +7,35 @@ import { FaSortDown } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { selectUsers } from '../../../store/user/selector';
 import useState from '../../../hooks/useState';
+import Alert from '../../../utils/alert';
+import { DeleteUserFunction } from '../../../store/user/action';
 
 function Users() {
     const users: UserType[] = useSelector(selectUsers);
     const [filter, setFilter] = useState<string>('');
+
+    function handleDelete(id: string, name: string) {
+        Alert({ title: 'Delete user', text: `Are you sure to delete ${name}?`, icon: 'warning', cancelButton: true, confirmText: 'Delete' })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    DeleteUserFunction(id)
+                        .then(result => {
+                            Alert({
+                                title: 'Success',
+                                icon: 'success',
+                                text: result
+                            });
+                        })
+                        .catch((error: Error) => {
+                            Alert({
+                                title: 'Error',
+                                icon: 'error',
+                                text: error.message,
+                            });
+                        });
+                }
+            });
+    }
 
     const columns: TableColumn<UserType>[] = [
         {
@@ -30,15 +55,15 @@ function Users() {
         },
         {
             name: 'Action',
-            cell: () => (
-                <div className="d-flex gap-1">
+            cell: (row) => (
+                <div className='d-flex gap-1'>
                     <OverlayTrigger
-                        placement="top"
+                        placement='top'
                         overlay={
-                            <Tooltip id="deleteTooltip">Delete</Tooltip>
+                            <Tooltip id='deleteTooltip'>Delete</Tooltip>
                         }
                     >
-                        <Button variant="icon" className="btn-transparent-dark btn-datatable">
+                        <Button variant='icon' className='btn-transparent-dark btn-datatable' onClick={() => handleDelete(row._id, row.name)}>
                             <FiTrash2 />
                         </Button>
                     </OverlayTrigger>
@@ -53,13 +78,13 @@ function Users() {
 
     return (
         <main>
-            <header className="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+            <header className='page-header page-header-dark bg-gradient-primary-to-secondary pb-10'>
                 <Container>
-                    <div className="page-header-content pt-4">
-                        <Row className="align-items-center justify-content-between">
-                            <Col xs="auto" className=" mt-4">
-                                <h1 className="page-header-title">
-                                    <div className="page-header-icon">
+                    <div className='page-header-content pt-4'>
+                        <Row className='align-items-center justify-content-between'>
+                            <Col xs='auto' className=' mt-4'>
+                                <h1 className='page-header-title'>
+                                    <div className='page-header-icon'>
                                         <FaUserDoctor />
                                     </div>
                                     Users
@@ -69,11 +94,11 @@ function Users() {
                     </div>
                 </Container>
             </header>
-            <Container className="mt-n10">
+            <Container className='mt-n10'>
                 <Card className='mb-4 card-header-actions'>
                     <Card.Header>
                         List
-                        <Form.Control style={{ maxWidth: '400px' }} placeholder="Search" onChange={(e) => setFilter(e.target.value)} />
+                        <Form.Control style={{ maxWidth: '400px' }} placeholder='Search' onChange={(e) => setFilter(e.target.value)} />
                     </Card.Header>
                     <Card.Body>
                         <DataTable
