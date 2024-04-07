@@ -1,13 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import NavbarComponent from './components/navbar';
+import LoadingComponent from './components/loading';
+
+const NavbarComponent = React.lazy(() => import('./components/navbar'));
 
 function App() {
     document.body.className = 'nav-fixed';
+
     return (
         <>
-            <NavbarComponent/>
-            <React.Suspense fallback={<div>Loading...</div>}>
+            <React.Suspense fallback={<LoadingComponent/>}>
+                <NavbarComponent/>
                 <Outlet/>
             </React.Suspense>
         </>

@@ -1,8 +1,16 @@
 import { Button, Dropdown, Nav, Navbar } from 'react-bootstrap';
 import { FiActivity, FiBell, FiLogOut, FiMail, FiMenu, FiSettings } from 'react-icons/fi';
 import Profile from '../assets/assets/img/illustrations/profiles/profile-1.png';
+import { LogoutFunction } from '../store/auth/action';
+import { UserType } from '../store/user/types';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '../store/auth/selector';
 
 function NavbarComponent() {
+    const currentUser: UserType | null = useSelector(selectCurrentUser);
+    function ToggleSidebar() {
+        document.body.classList.toggle('sidenav-toggled');
+    }
     return (
         <Navbar
             variant='light'
@@ -21,6 +29,7 @@ function NavbarComponent() {
                 variant='icon'
                 className='btn-transparent-dark order-1 order-lg-0 mr-lg-2'
                 id='sidebarToggle'
+                onClick={() => ToggleSidebar()}
             >
                 <FiMenu />
             </Button>
@@ -122,8 +131,8 @@ function NavbarComponent() {
                         >
                             <img className='dropdown-user-img' src={Profile} alt='Profile Image'/>
                             <div className='dropdown-user-details'>
-                                <div className='dropdown-user-details-name'>Valerie Luna</div>
-                                <div className='dropdown-user-details-email'>vluna@aol.com</div>
+                                <div className='dropdown-user-details-name'>{currentUser?.name ?? 'Testing'}</div>
+                                <div className='dropdown-user-details-email'>{currentUser?.email ?? 'testing@gmail.com'}</div>
                             </div>
                         </Dropdown.Header>
                         <Dropdown.Divider/>
@@ -133,7 +142,7 @@ function NavbarComponent() {
                             </div>
                             Account
                         </Dropdown.Item>
-                        <Dropdown.Item>
+                        <Dropdown.Item onClick={() => LogoutFunction()}>
                             <div className='dropdown-item-icon'>
                                 <FiLogOut/>
                             </div>

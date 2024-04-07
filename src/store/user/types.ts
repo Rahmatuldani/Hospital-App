@@ -12,6 +12,7 @@ export type UserType = {
     _id: string;
     name: string;
     email: string;
+    password: string;
     role: string;
     polyclinic?: string | null;
     gender: string;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import LoadingComponent from '../../components/loading';
-import { FetchUsersFunction } from '../../store/user/action';
 import { UserType } from '../../store/user/types';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../store/auth/selector';
@@ -9,17 +8,14 @@ import { selectCurrentUser } from '../../store/auth/selector';
 const Sidebar = React.lazy(() => import('../../components/sidebar'));
 const SidebarItems = React.lazy(() => import('./sidebar'));
 
-function AdminLayout() {
+function ReceptionistLayout() {
     const currentUser: UserType | null = useSelector(selectCurrentUser);
     if (!currentUser) {
         return <Navigate to={'/login'} replace />;
     }
-    if (currentUser?.role !== 'Administrator') {
+    if (currentUser?.role !== 'Receptionist') {
         return <Navigate to={`/${String((currentUser.role).toLowerCase())}`} replace />;
     }
-
-    FetchUsersFunction();
-
     return (
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -48,4 +44,4 @@ function AdminLayout() {
     );
 }
 
-export default AdminLayout;
+export default ReceptionistLayout;

@@ -2,7 +2,7 @@ import { Action, ActionWithPayload, createAction, withMatcher } from '../../util
 import { USERS_ACTION_TYPES, UserType } from './types';
 import { store } from '../store';
 import { generateRandomString } from '../../utils/convert';
-import Dummy from '../../data/dummy.json';
+import Users from '../../data/users.json';
 
 // Reducer Loading
 export type ReducerLoading = Action<USERS_ACTION_TYPES.REDUCER_LOADING>;
@@ -24,7 +24,7 @@ export const fetchUsers = withMatcher(
 
 export function FetchUsersFunction(): Promise<string> {
     store.dispatch(reducerLoading());
-    const users: UserType[] = Dummy;
+    const users: UserType[] = Users;
 
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -52,6 +52,7 @@ export const createUser = withMatcher(
 export function CreateUserFunction(user: UserType): Promise<string> {
     store.dispatch(reducerLoading());
     user._id = generateRandomString();
+    user.password = 'adminpass';
 
     return new Promise((resolve, reject) => {
         setTimeout(() => {
