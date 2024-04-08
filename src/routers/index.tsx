@@ -5,11 +5,11 @@ import AdminRouters from './admin';
 import { UserType } from '../store/user/types';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../store/auth/selector';
-import AppLayout from '../layout';
 import ReceptionistRouters from './receptionist';
+import Login from '../pages/auth/login';
+import AppLayout from '../layout';
 
 const NotFoundPage = React.lazy(() => import('../pages/errors/notFound'));
-const Login = React.lazy(() => import('../pages/auth/login'));
 
 function ErrorBoundary() {
     const error = useRouteError();
@@ -31,17 +31,15 @@ function RouteRedirect() {
 
 const Routers = createBrowserRouter(
     createRoutesFromElements(
-        <>
-            <Route element={<AppLayout/>}>
-                <Route path="/" element={<App/>} errorElement={<ErrorBoundary/>}>
-                    <Route index element={<RouteRedirect/>}/>
-                    {AdminRouters()}
-                    {ReceptionistRouters()}
-                </Route>
-                <Route path="/login" element={<Login/>}/>
-                <Route path='*' element={<NotFoundPage/>}/>
+        <Route element={<AppLayout/>} errorElement={<ErrorBoundary/>}>
+            <Route path="/" element={<App/>}>
+                <Route index element={<RouteRedirect/>}/>
+                {AdminRouters()}
+                {ReceptionistRouters()}
             </Route>
-        </>
+            <Route path="/login" element={<Login/>}/>
+            <Route path='*' element={<NotFoundPage/>}/>
+        </Route>
     )
 );
 

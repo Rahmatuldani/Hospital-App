@@ -1,7 +1,7 @@
+import { Dispatch } from 'redux';
 import AuthApi from '../../data/authApi';
 import Alert from '../../utils/alert';
 import { Action, ActionWithPayload, createAction, withMatcher } from '../../utils/reducer';
-import { store } from '../store';
 import { UserType } from '../user/types';
 import { AUTH_ACTION_TYPES, LoginData } from './types';
 
@@ -23,14 +23,14 @@ export const login = withMatcher(
     (user: UserType): Login => createAction(AUTH_ACTION_TYPES.LOGIN, user)
 );
 
-export async function LoginFunction(data: LoginData) {
-    store.dispatch(reducerLoading());
+export async function LoginFunction(dispatch: Dispatch, data: LoginData) {
+    dispatch(reducerLoading());
     try {
         const user: UserType = await AuthApi.Login(data);
-        store.dispatch(login(user));
+        dispatch(login(user));
         return user;
     } catch (error) {
-        store.dispatch(reducerError(error as Error));
+        dispatch(reducerError(error as Error));
         Alert({
             title: 'Error',
             icon: 'error',
@@ -47,13 +47,13 @@ export const logout = withMatcher(
     (): Logout => createAction(AUTH_ACTION_TYPES.LOGOUT)
 );
 
-export async function LogoutFunction() {
-    store.dispatch(reducerLoading());
+export async function LogoutFunction(dispatch: Dispatch) {
+    dispatch(reducerLoading());
     try {
-        store.dispatch(logout());
+        dispatch(logout());
         return;
     } catch (error) {
-        store.dispatch(reducerError(error as Error));
+        dispatch(reducerError(error as Error));
         return error as Error;
     }
 }

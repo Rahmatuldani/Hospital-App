@@ -3,11 +3,13 @@ import { FiActivity, FiBell, FiLogOut, FiMail, FiMenu, FiSettings } from 'react-
 import Profile from '../assets/assets/img/illustrations/profiles/profile-1.png';
 import { LogoutFunction } from '../store/auth/action';
 import { UserType } from '../store/user/types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '../store/auth/selector';
+import { Dispatch } from 'redux';
 
 function NavbarComponent() {
     const currentUser: UserType | null = useSelector(selectCurrentUser);
+    const dispatch: Dispatch = useDispatch();
     function ToggleSidebar() {
         document.body.classList.toggle('sidenav-toggled');
     }
@@ -142,7 +144,7 @@ function NavbarComponent() {
                             </div>
                             Account
                         </Dropdown.Item>
-                        <Dropdown.Item onClick={() => LogoutFunction()}>
+                        <Dropdown.Item onClick={() => LogoutFunction(dispatch)}>
                             <div className='dropdown-item-icon'>
                                 <FiLogOut/>
                             </div>

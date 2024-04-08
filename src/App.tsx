@@ -8,12 +8,10 @@ function App() {
     document.body.className = 'nav-fixed';
 
     return (
-        <>
-            <React.Suspense fallback={<LoadingComponent/>}>
-                <NavbarComponent/>
-                <Outlet/>
-            </React.Suspense>
-        </>
+        <React.Suspense fallback={<LoadingComponent/>}>
+            <NavbarComponent/>
+            <Outlet/>
+        </React.Suspense>
     );
 }
 
