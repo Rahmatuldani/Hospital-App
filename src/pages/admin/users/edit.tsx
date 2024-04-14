@@ -4,10 +4,11 @@ import { Polyclinic, UserRole, UserType } from '../../../store/user/types';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { UpdateUserFunction } from '../../../store/user/action';
 import Alert from '../../../utils/alert';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUsersById, selectUsersIsLoading } from '../../../store/user/selector';
 import { useNavigate, useParams } from 'react-router-dom';
 import { EmptyToNull } from '../../../utils/convert';
+import { Dispatch } from 'redux';
 
 
 function EditUser() {
@@ -16,11 +17,12 @@ function EditUser() {
     const { handleSubmit, control, formState: { errors } } = useForm<UserType>({ defaultValues: user});
     const loading = useSelector(selectUsersIsLoading);
     const navigate = useNavigate();
+    const dispatch: Dispatch = useDispatch();
 
     const FormSubmit: SubmitHandler<UserType> = (data) => {
         const formData = EmptyToNull(data);
         
-        UpdateUserFunction(formData as UserType)
+        UpdateUserFunction(dispatch, formData as UserType)
             .then(result => {
                 Alert({
                     title: 'Success',
@@ -163,7 +165,7 @@ function EditUser() {
                                         <Form.Group as={Col} className='mb-2' controlId='inputPolyclinic'>
                                             <Form.Label className='small mb-1'>Polyclinic</Form.Label>
                                             <Form.Select aria-label='select-polyclinic' onChange={onChange} onBlur={onBlur} value={value ?? ''}>
-                                                <option value='' disabled> -- Select Polyclinic -- </option>
+                                                <option value=''> -- Select Polyclinic -- </option>
                                                 {Polyclinic.map((role) => (
                                                     <option key={role} value={role}>{role}</option>
                                                 ))}

@@ -4,7 +4,7 @@ import { Polyclinic, UserRole, UserType } from '../../../store/user/types';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { CreateUserFunction } from '../../../store/user/action';
 import Alert from '../../../utils/alert';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUsersIsLoading } from '../../../store/user/selector';
 import { useNavigate } from 'react-router-dom';
 import { EmptyToNull } from '../../../utils/convert';
@@ -13,10 +13,11 @@ function AddUser() {
     const { handleSubmit, control, formState: { errors } } = useForm<UserType>();
     const loading = useSelector(selectUsersIsLoading);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const FormSubmit: SubmitHandler<UserType> = (data) => {
         const formData = EmptyToNull(data);
-        CreateUserFunction(formData as UserType)
+        CreateUserFunction(dispatch, formData as UserType)
             .then(result => {
                 Alert({
                     title: 'Success',

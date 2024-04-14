@@ -3,11 +3,10 @@ import {
     createUser,
     deleteUser,
     fetchUsers,
-    reducerError,
-    reducerLoading,
     updateUser, 
 } from './action';
 import { UserType } from './types';
+import { reducerError, reducerLoading } from '../shared/action';
 
 export type UsersState = {
     readonly users: UserType[];

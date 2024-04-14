@@ -3,14 +3,16 @@ import { Navigate, Outlet } from 'react-router-dom';
 import LoadingComponent from '../../components/loading';
 import { FetchUsersFunction } from '../../store/user/action';
 import { UserType } from '../../store/user/types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../store/auth/selector';
+import { Dispatch } from 'redux';
 
 const Sidebar = React.lazy(() => import('../../components/sidebar'));
 const SidebarItems = React.lazy(() => import('./sidebar'));
 
 function AdminLayout() {
     const currentUser: UserType | null = useSelector(selectCurrentUser);
+    const dispatch: Dispatch = useDispatch();
     if (!currentUser) {
         return <Navigate to={'/login'} replace />;
     }
@@ -18,7 +20,7 @@ function AdminLayout() {
         return <Navigate to={`/${String((currentUser.role).toLowerCase())}`} replace />;
     }
 
-    FetchUsersFunction();
+    FetchUsersFunction(dispatch);
 
     return (
         <div id="layoutSidenav">

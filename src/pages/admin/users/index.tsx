@@ -4,26 +4,28 @@ import { UserType } from '../../../store/user/types';
 import DataTable, { TableColumn } from 'react-data-table-component';
 import { FiTrash2 } from 'react-icons/fi';
 import { FaEdit, FaSortDown } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUsers, selectUsersIsLoading } from '../../../store/user/selector';
 import useState from '../../../hooks/useState';
 import Alert from '../../../utils/alert';
 import { DeleteUserFunction } from '../../../store/user/action';
 import UserDetail from './detail';
-import { useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import LoadingComponent from '../../../components/loading';
+import { Dispatch } from 'redux';
 
-function Users() {
+function Users(): React.ReactNode {
     const users: UserType[] = useSelector(selectUsers);
-    const loading = useSelector(selectUsersIsLoading);
+    const loading: boolean = useSelector(selectUsersIsLoading);
     const [filter, setFilter] = useState<string>('');
-    const navigate = useNavigate();
+    const navigate: NavigateFunction = useNavigate();
+    const dispatch: Dispatch = useDispatch();
 
-    function handleDelete(id: string, name: string) {
+    function handleDelete(id: string, name: string): void {
         Alert({ title: 'Delete user', text: `Are you sure to delete ${name}?`, icon: 'warning', cancelButton: true, confirmText: 'Delete' })
             .then((result) => {
                 if (result.isConfirmed) {
-                    DeleteUserFunction(id)
+                    DeleteUserFunction(dispatch, id)
                         .then(result => {
                             Alert({
                                 title: 'Success',

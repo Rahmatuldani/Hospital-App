@@ -1,20 +1,9 @@
-import { Action, ActionWithPayload, createAction, withMatcher } from '../../utils/reducer';
+import { ActionWithPayload, createAction, withMatcher } from '../../utils/reducer';
 import { USERS_ACTION_TYPES, UserType } from './types';
-import { store } from '../store';
 import { generateRandomString } from '../../utils/convert';
 import Users from '../../data/users.json';
-
-// Reducer Loading
-export type ReducerLoading = Action<USERS_ACTION_TYPES.REDUCER_LOADING>;
-export const reducerLoading = withMatcher(
-    (): ReducerLoading => createAction(USERS_ACTION_TYPES.REDUCER_LOADING)
-);
-
-// Reducer Error
-export type ReducerError = ActionWithPayload<USERS_ACTION_TYPES.REDUCER_ERROR, Error>;
-export const reducerError = withMatcher(
-    (error: Error): ReducerError => createAction(USERS_ACTION_TYPES.REDUCER_ERROR, error)
-);
+import { reducerError, reducerLoading } from '../shared/action';
+import { Dispatch } from 'redux';
 
 // Begin Fetch User
 export type FetchUsers = ActionWithPayload<USERS_ACTION_TYPES.FETCH_USERS, UserType[]>;
@@ -22,21 +11,21 @@ export const fetchUsers = withMatcher(
     (users: UserType[]): FetchUsers => createAction(USERS_ACTION_TYPES.FETCH_USERS, users)
 );
 
-export function FetchUsersFunction(): Promise<string> {
-    store.dispatch(reducerLoading());
+export function FetchUsersFunction(dispatch: Dispatch): Promise<string> {
+    dispatch(reducerLoading());
     const users: UserType[] = Users;
 
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const result = 10 + 60;
             if (result === 70) {
-                store.dispatch(fetchUsers(users));
+                dispatch(fetchUsers(users));
     
                 return resolve('Fetch user success');
             }
     
             const error: Error = new Error('Fetch user failed');
-            store.dispatch(reducerError(error));
+            dispatch(reducerError(error));
             return reject(error);
         }, 1000);
     });
@@ -49,8 +38,8 @@ export const createUser = withMatcher(
     (user: UserType): CreateUser => createAction(USERS_ACTION_TYPES.CREATE_USERS, user)
 );
 
-export function CreateUserFunction(user: UserType): Promise<string> {
-    store.dispatch(reducerLoading());
+export function CreateUserFunction(dispatch: Dispatch, user: UserType): Promise<string> {
+    dispatch(reducerLoading());
     user._id = generateRandomString();
     user.password = 'adminpass';
 
@@ -58,13 +47,13 @@ export function CreateUserFunction(user: UserType): Promise<string> {
         setTimeout(() => {
             const result = 10 + 60;
             if (result === 70) {
-                store.dispatch(createUser(user));
+                dispatch(createUser(user));
     
                 return resolve('Create user success');
             }
     
             const error: Error = new Error('Create user failed');
-            store.dispatch(reducerError(error));
+            dispatch(reducerError(error));
             return reject(error);
         }, 1000);
     });
@@ -77,20 +66,20 @@ export const updateUser = withMatcher(
     (user: UserType): UpdateUser => createAction(USERS_ACTION_TYPES.UPDATE_USERS, user)
 );
 
-export function UpdateUserFunction(user: UserType): Promise<string> {
-    store.dispatch(reducerLoading());
+export function UpdateUserFunction(dispatch: Dispatch, user: UserType): Promise<string> {
+    dispatch(reducerLoading());
 
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const result = 10 + 60;
             if (result === 70) {
-                store.dispatch(updateUser(user));
+                dispatch(updateUser(user));
     
                 return resolve('Update user success');
             }
     
             const error: Error = new Error('Update user failed');
-            store.dispatch(reducerError(error));
+            dispatch(reducerError(error));
             return reject(error);
         }, 1000);
     });
@@ -103,20 +92,20 @@ export const deleteUser = withMatcher(
     (id: string): DeleteUser => createAction(USERS_ACTION_TYPES.DELETE_USERS, id)
 );
 
-export function DeleteUserFunction(id: string): Promise<string> {
-    store.dispatch(reducerLoading());
+export function DeleteUserFunction(dispatch: Dispatch, id: string): Promise<string> {
+    dispatch(reducerLoading());
 
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const result = 10 + 60;
             if (result === 70) {
-                store.dispatch(deleteUser(id));
+                dispatch(deleteUser(id));
     
                 return resolve('Delete user success');
             }
     
             const error: Error = new Error('Delete user failed');
-            store.dispatch(reducerError(error));
+            dispatch(reducerError(error));
             return reject(error);
         }, 1000);
     });
