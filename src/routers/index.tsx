@@ -1,15 +1,15 @@
 import React from 'react';
 import { createBrowserRouter, createRoutesFromElements, isRouteErrorResponse, Navigate, Route, useRouteError } from 'react-router-dom';
-import App from '../App';
 import AdminRouters from './admin';
 import { UserType } from '../store/user/types';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../store/auth/selector';
 import ReceptionistRouters from './receptionist';
-import Login from '../pages/auth/login';
 import AppLayout from '../layout';
 
+const App = React.lazy(() => import('../App'));
 const NotFoundPage = React.lazy(() => import('../pages/errors/notFound'));
+const Login = React.lazy(() => import('../pages/auth/login'));
 
 function ErrorBoundary() {
     const error = useRouteError();

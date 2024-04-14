@@ -1,17 +1,17 @@
-// import React from 'react';
-import { Nav } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import { Collapse, Nav } from 'react-bootstrap';
+import { NavLink, useLocation } from 'react-router-dom';
 import { FiActivity } from 'react-icons/fi';
-// import useState from '../../hooks/useState';
-// import { FaAngleDown, FaUserInjured } from 'react-icons/fa6';
+import useState from '../../hooks/useState';
+import { FaAngleDown, FaUserInjured } from 'react-icons/fa6';
 
 function SidebarItems() {
-    // const location = useLocation().pathname.split('/')[2];
-    // const [collapseEl, setCollapseEl] = useState<string | undefined>(location);
+    const location = useLocation().pathname.split('/')[2];
+    const [collapseEl, setCollapseEl] = useState<string | undefined>(location);
 
-    // React.useEffect(() => {
-    //     setCollapseEl(location);
-    // }, [location]);
+    React.useEffect(() => {
+        setCollapseEl(location);
+    }, [location]);
 
     return (
         <Nav className='accordion'>
@@ -22,7 +22,7 @@ function SidebarItems() {
                 </div>
                 Dashboard
             </NavLink>
-            {/* <Nav.Link href='' className={`${collapseEl === 'patients' ? '' : 'collapsed'}`} onClick={() => collapseEl === 'patients' ? setCollapseEl(undefined) : setCollapseEl('patients')}>
+            <Nav.Link href='' className={`${collapseEl === 'patients' ? '' : 'collapsed'}`} onClick={() => collapseEl === 'patients' ? setCollapseEl(undefined) : setCollapseEl('patients')}>
                 <div className='nav-link-icon'>
                     <FaUserInjured />
                 </div>
@@ -36,7 +36,7 @@ function SidebarItems() {
                     <NavLink to={'/receptionist/patients'} role='button' className='nav-link' tabIndex={0} end>List</NavLink>
                     <NavLink to={'/receptionist/patients/add'} role='button' className='nav-link' tabIndex={0} end>Add</NavLink>
                 </Nav>
-            </Collapse> */}
+            </Collapse>
         </Nav>
     );
 }

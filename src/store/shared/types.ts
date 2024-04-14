@@ -1,0 +1,4 @@
+export enum SHARED_ACTION_TYPES {
+    REDUCER_LOADING = 'shared/REDUCER_LOADING',
+    REDUCER_ERROR = 'shared/REDUCER_ERROR',
+}

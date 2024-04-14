@@ -1,29 +1,29 @@
 import { Button, Card, Col, Container, Form, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
-import { FaUserDoctor } from 'react-icons/fa6';
-import { UserType } from '../../../store/user/types';
+import { FaSortDown, FaUserInjured } from 'react-icons/fa6';
+import LoadingComponent from '../../../components/loading';
 import DataTable, { TableColumn } from 'react-data-table-component';
-import { FiTrash2 } from 'react-icons/fi';
-import { FaEdit, FaSortDown } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
-import { selectUsers, selectUsersIsLoading } from '../../../store/user/selector';
+import { PatientType } from '../../../store/patient/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectPatients, selectPatientsIsLoading } from '../../../store/patient/selector';
 import useState from '../../../hooks/useState';
 import Alert from '../../../utils/alert';
-import { DeleteUserFunction } from '../../../store/user/action';
-import UserDetail from './detail';
-import { useNavigate } from 'react-router-dom';
-import LoadingComponent from '../../../components/loading';
+// import { useNavigate } from 'react-router-dom';
+import { FiTrash2 } from 'react-icons/fi';
+import PatientDetail from './detail';
+import { DeletePatientFunction } from '../../../store/patient/action';
 
-function Users() {
-    const users: UserType[] = useSelector(selectUsers);
-    const loading = useSelector(selectUsersIsLoading);
+function Patients() {
+    const patients: PatientType[] = useSelector(selectPatients);
+    const loading = useSelector(selectPatientsIsLoading);
     const [filter, setFilter] = useState<string>('');
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    // const navigate = useNavigate();
 
     function handleDelete(id: string, name: string) {
-        Alert({ title: 'Delete user', text: `Are you sure to delete ${name}?`, icon: 'warning', cancelButton: true, confirmText: 'Delete' })
+        Alert({ title: 'Delete patient', text: `Are you sure to delete ${name}?`, icon: 'warning', cancelButton: true, confirmText: 'Delete' })
             .then((result) => {
                 if (result.isConfirmed) {
-                    DeleteUserFunction(id)
+                    DeletePatientFunction(dispatch, id)
                         .then(result => {
                             Alert({
                                 title: 'Success',
@@ -42,10 +42,15 @@ function Users() {
             });
     }
 
-    const columns: TableColumn<UserType>[] = [
+    const columns: TableColumn<PatientType>[] = [
         {
             name: 'ID',
             selector: row => row._id,
+            sortable: true
+        },
+        {
+            name: 'BPJS',
+            selector: row => row.bpjs ?? '-',
             sortable: true
         },
         {
@@ -54,27 +59,12 @@ function Users() {
             sortable: true
         },
         {
-            name: 'Email',
-            selector: row => row.email,
-            sortable: true
-        },
-        {
-            name: 'Role',
-            selector: row => row.role,
-            sortable: true
-        },
-        {
-            name: 'Polyclinic',
-            selector: row => row.polyclinic ?? '-',
-            sortable: true
-        },
-        {
             name: 'Action',
             cell: (row) => (
                 <div className='d-flex gap-1'>
-                    <UserDetail user={row}/>
+                    <PatientDetail patient={row}/>
 
-                    <OverlayTrigger
+                    {/* <OverlayTrigger
                         placement='top'
                         overlay={
                             <Tooltip id='editTooltip'>Edit</Tooltip>
@@ -83,7 +73,7 @@ function Users() {
                         <Button variant='icon' className='btn-transparent-dark btn-datatable' onClick={() => navigate(`/administrator/users/edit/${row._id}`)}>
                             <FaEdit />
                         </Button>
-                    </OverlayTrigger>
+                    </OverlayTrigger> */}
                     <OverlayTrigger
                         placement='top'
                         overlay={
@@ -99,10 +89,9 @@ function Users() {
         },
     ];
 
-    const filterUsers: UserType[] = users.filter((user) => user.email.toLowerCase().includes(filter.toLowerCase()) || 
-        user._id.includes(filter) || user.name.toLowerCase().includes(filter.toLowerCase())
+    const filterPatients: PatientType[] = patients.filter((patient) => patient.bpjs?.toLowerCase().includes(filter.toLowerCase()) || 
+        patient._id.includes(filter) || patient.name.toLowerCase().includes(filter.toLowerCase())
     );
-
     return (
         <main>
             <header className='page-header page-header-dark bg-gradient-primary-to-secondary pb-10'>
@@ -112,9 +101,9 @@ function Users() {
                             <Col xs='auto' className=' mt-4'>
                                 <h1 className='page-header-title'>
                                     <div className='page-header-icon'>
-                                        <FaUserDoctor />
+                                        <FaUserInjured />
                                     </div>
-                                    Users
+                                    Patients
                                 </h1>
                             </Col>
                         </Row>
@@ -133,7 +122,7 @@ function Users() {
                         ) : (
                             <DataTable
                                 columns={columns}
-                                data={filterUsers}
+                                data={filterPatients}
                                 pagination
                                 sortIcon={<FaSortDown/>}
                                 responsive
@@ -148,4 +137,4 @@ function Users() {
     );
 }
 
-export default Users;
+export default Patients;

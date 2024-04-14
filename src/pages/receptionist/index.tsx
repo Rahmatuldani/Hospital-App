@@ -2,14 +2,18 @@ import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import LoadingComponent from '../../components/loading';
 import { UserType } from '../../store/user/types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../store/auth/selector';
+import { Dispatch } from 'redux';
+import { FetchPatientsFunction } from '../../store/patient/action';
 
 const Sidebar = React.lazy(() => import('../../components/sidebar'));
 const SidebarItems = React.lazy(() => import('./sidebar'));
 
 function ReceptionistLayout() {
     const currentUser: UserType | null = useSelector(selectCurrentUser);
+    const dispatch: Dispatch = useDispatch();
+    FetchPatientsFunction(dispatch);
     if (!currentUser) {
         return <Navigate to={'/login'} replace />;
     }

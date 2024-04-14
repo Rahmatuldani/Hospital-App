@@ -1,13 +1,13 @@
 import { Button, Col, Form, Modal, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 import useState from '../../../hooks/useState';
 import { FaClipboardList } from 'react-icons/fa';
-import { UserType } from '../../../store/user/types';
+import { PatientType } from '../../../store/patient/types';
 
 interface DetailProps {
-    user: UserType;
+    patient: PatientType
 }
 
-function UserDetail({ user }: DetailProps) {
+function PatientDetail({ patient }: DetailProps) {
     const [show, setShow] = useState<boolean>(false);
 
     return (
@@ -24,23 +24,23 @@ function UserDetail({ user }: DetailProps) {
             </OverlayTrigger>
 
             <Modal show={show} onHide={() => setShow(false)}>
-                <Modal.Header closeButton>User Detail</Modal.Header>
+                <Modal.Header closeButton>Patient Detail</Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group as={Row} controlId='ID'>
+                        <Form.Group as={Row} controlId='medicalRecord'>
                             <Form.Label column sm='4'>
-                                ID
+                                Medical Record
                             </Form.Label>
                             <Col sm='8'>
-                                <Form.Control plaintext readOnly defaultValue={user._id} />
+                                <Form.Control plaintext readOnly defaultValue={patient._id} />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} controlId='email'>
+                        <Form.Group as={Row} controlId='bpjs'>
                             <Form.Label column sm='4'>
-                                Email
+                                BPJS
                             </Form.Label>
                             <Col sm='8'>
-                                <Form.Control plaintext readOnly defaultValue={user.email} />
+                                <Form.Control plaintext readOnly defaultValue={patient.bpjs ?? '-'} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId='name'>
@@ -48,23 +48,23 @@ function UserDetail({ user }: DetailProps) {
                                 Name
                             </Form.Label>
                             <Col sm='8'>
-                                <Form.Control plaintext readOnly defaultValue={user.name} />
+                                <Form.Control plaintext readOnly defaultValue={patient.name} />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} controlId='role'>
+                        <Form.Group as={Row} controlId='birthPlace'>
                             <Form.Label column sm='4'>
-                                Role
+                                Birth Place
                             </Form.Label>
                             <Col sm='8'>
-                                <Form.Control plaintext readOnly defaultValue={user.role} />
+                                <Form.Control plaintext readOnly defaultValue={patient.birthPlace} />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} controlId='polyclinic'>
+                        <Form.Group as={Row} controlId='birthDate'>
                             <Form.Label column sm='4'>
-                                Polyclinic
+                                Birth Date
                             </Form.Label>
                             <Col sm='8'>
-                                <Form.Control plaintext readOnly defaultValue={user.polyclinic ?? '-'} />
+                                <Form.Control plaintext readOnly defaultValue={patient.birthDate} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId='gender'>
@@ -72,7 +72,7 @@ function UserDetail({ user }: DetailProps) {
                                 Gender
                             </Form.Label>
                             <Col sm='8'>
-                                <Form.Control plaintext readOnly defaultValue={user.gender} />
+                                <Form.Control plaintext readOnly defaultValue={patient.gender} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId='phone'>
@@ -80,7 +80,7 @@ function UserDetail({ user }: DetailProps) {
                                 Phone
                             </Form.Label>
                             <Col sm='8'>
-                                <Form.Control plaintext readOnly defaultValue={user.phone} />
+                                <Form.Control plaintext readOnly defaultValue={patient.phone} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId='address'>
@@ -88,7 +88,7 @@ function UserDetail({ user }: DetailProps) {
                                 Address
                             </Form.Label>
                             <Col sm='8'>
-                                <Form.Control plaintext readOnly defaultValue={user.address ?? '-'} />
+                                <Form.Control plaintext readOnly defaultValue={patient.address} />
                             </Col>
                         </Form.Group>
                     </Form>
@@ -101,4 +101,4 @@ function UserDetail({ user }: DetailProps) {
     );
 }
 
-export default UserDetail;
+export default PatientDetail;

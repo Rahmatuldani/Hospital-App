@@ -27,7 +27,7 @@
         "email": "doctor@gmail.com",
         "password": "adminpass",
         "role": "Doctor",
-        "polyclinic": null,
+        "polyclinic": "THT",
         "gender": "Female",
         "address": null,
         "phone": "08123456789"
