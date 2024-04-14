@@ -2,6 +2,7 @@ import { Button, Col, Form, Modal, OverlayTrigger, Row, Tooltip } from 'react-bo
 import useState from '../../../hooks/useState';
 import { FaClipboardList } from 'react-icons/fa';
 import { PatientType } from '../../../store/patient/types';
+import { ConvertDate } from '../../../utils/convert';
 
 interface DetailProps {
     patient: PatientType
@@ -51,20 +52,12 @@ function PatientDetail({ patient }: DetailProps) {
                                 <Form.Control plaintext readOnly defaultValue={patient.name} />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} controlId='birthPlace'>
+                        <Form.Group as={Row} controlId='birth'>
                             <Form.Label column sm='4'>
-                                Birth Place
+                                Birth
                             </Form.Label>
                             <Col sm='8'>
-                                <Form.Control plaintext readOnly defaultValue={patient.birthPlace} />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} controlId='birthDate'>
-                            <Form.Label column sm='4'>
-                                Birth Date
-                            </Form.Label>
-                            <Col sm='8'>
-                                <Form.Control plaintext readOnly defaultValue={patient.birthDate} />
+                                <Form.Control plaintext readOnly defaultValue={patient.birthPlace + ' / ' + ConvertDate(patient.birthDate)} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId='gender'>

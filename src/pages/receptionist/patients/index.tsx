@@ -11,6 +11,7 @@ import Alert from '../../../utils/alert';
 import { FiTrash2 } from 'react-icons/fi';
 import PatientDetail from './detail';
 import { DeletePatientFunction } from '../../../store/patient/action';
+import { ConvertDate } from '../../../utils/convert';
 
 function Patients() {
     const patients: PatientType[] = useSelector(selectPatients);
@@ -56,6 +57,11 @@ function Patients() {
         {
             name: 'Name',
             selector: row => row.name,
+            sortable: true
+        },
+        {
+            name: 'Birth',
+            selector: row => row.birthPlace + ' / ' + ConvertDate(row.birthDate),
             sortable: true
         },
         {

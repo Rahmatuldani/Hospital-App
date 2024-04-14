@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function EmptyToNull(obj: Record<string, any>): Record<string, any> {
     for (const key in obj) {
@@ -20,7 +22,13 @@ function generateRandomString(): string {
     return randomString;
 }
 
+function ConvertDate(date: string): string {
+    const newDate = moment(date).format('ll',);
+    return newDate;
+}
+
 export {
     EmptyToNull,
-    generateRandomString
+    generateRandomString,
+    ConvertDate
 };

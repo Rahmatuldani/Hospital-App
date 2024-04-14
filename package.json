@@ -47,6 +47,7 @@
     "eslint-plugin-react-refresh": "^0.4.6",
     "jest-environment-jsdom": "^29.7.0",
     "jose": "^5.2.3",
+    "moment": "^2.30.1",
     "react-spinners": "^0.13.8",
     "sweetalert2": "^11.10.7",
     "ts-jest": "^29.1.2",
