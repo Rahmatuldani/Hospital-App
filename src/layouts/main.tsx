@@ -8,7 +8,6 @@ function MainLayout({children}: {children: React.ReactNode}) {
     return (
         <>
             <NavbarLayout/>
-            <p>Main Layout</p>
             {children}
         </>
     );
