@@ -1,6 +1,7 @@
 import React from "react";
 import { createBrowserRouter } from "react-router";
 import App from "../App";
+import LoginPage from "@/pages/auth/login";
 
 const AdminPage = React.lazy(() => import("../pages/admin"))
 const AdminDashboard = React.lazy(() => import("../pages/admin/dashboard"))
@@ -15,7 +16,12 @@ export const router = createBrowserRouter([
                 element: <AdminDashboard/>
             }
         ]
-    }, {
+    },
+    {
+        path: "login",
+        element: <LoginPage/>
+    },
+    {
         path: "",
         element: <App/>
     }
