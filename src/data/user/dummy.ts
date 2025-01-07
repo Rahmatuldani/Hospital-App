@@ -1,0 +1,88 @@
+import { Gender, User, UserRole } from "./types";
+
+export const UserDummy: User[] = [
+    {
+        _id: "c0d6cb1cde940bf372ccbdd1",		
+        np: "67771376",		
+        email: "Karla.Trantow-Yundt@gmail.com",		
+        firstName: "Monique",		
+        lastName: "Rogahn",		
+        birthDate: new Date("2000-01-01"),		
+        birthPlace: "South Maybellestead",		
+        gender: Gender.MALE,		
+        role: UserRole.ADMINISTRATOR,		
+        createdAt: new Date(),		
+        updatedAt: new Date(),		
+        deletedAt: null		
+    },
+    {
+        _id: "fc43bca6e720dda2ef61f3c3",		
+        np: "43282350",		
+        email: "Paula.Gislason@hotmail.com",		
+        firstName: "Javier",		
+        lastName: "Block",		
+        birthDate: new Date("2000-01-01"),		
+        birthPlace: "Gerlachbury",		
+        gender: Gender.MALE,		
+        role: UserRole.RECEPTIONIST,		
+        createdAt: new Date(),		
+        updatedAt: new Date(),		
+        deletedAt: null		
+    },
+    {
+        _id: "ac69e763fe6bf1d69ec8f38c",		
+        np: "59443365",		
+        email: "Janice.Walker10@gmail.com",		
+        firstName: "Elsie",		
+        lastName: "Casper",		
+        birthDate: new Date("2000-01-01"),		
+        birthPlace: "East Estevan",		
+        gender: Gender.FEMALE,		
+        role: UserRole.DOCTOR,		
+        createdAt: new Date(),		
+        updatedAt: new Date(),		
+        deletedAt: null		
+    },
+    {
+        _id: "4802f67a80c030f7ccaf1bb9",		
+        np: "43251411",		
+        email: "Irene.Wyman82@gmail.com",		
+        firstName: "Joanna",		
+        lastName: "Dare",		
+        birthDate: new Date("2000-01-01"),		
+        birthPlace: "North Vallie",		
+        gender: Gender.FEMALE,		
+        role: UserRole.PHARMACIST,		
+        createdAt: new Date(),		
+        updatedAt: new Date(),		
+        deletedAt: null		
+    },
+    {
+        _id: "098dadc4be39dce3727bbbee",		
+        np: "09807577",		
+        email: "Maureen.Mohr@yahoo.com",		
+        firstName: "Bert",		
+        lastName: "Hamill",		
+        birthDate: new Date("2000-01-01"),		
+        birthPlace: "Nikolasville",		
+        gender: Gender.MALE,		
+        role: UserRole.LOGISTIC,		
+        createdAt: new Date(),		
+        updatedAt: new Date(),		
+        deletedAt: null		
+    },
+    {
+        _id: "35e003718a429bff95f57a1c",		
+        np: "23937095",		
+        email: "Micheal_OHara@gmail.com",		
+        firstName: "Viola",		
+        lastName: "Rohan",		
+        birthDate: new Date("2000-01-01"),		
+        birthPlace: "Brentburgh",		
+        gender: Gender.FEMALE,		
+        role: UserRole.CASHIER,		
+        createdAt: new Date(),		
+        updatedAt: new Date(),		
+        deletedAt: null		
+    },
+]

@@ -2,6 +2,8 @@ import { Outlet } from "react-router";
 import MainLayout from "@/layouts/main";
 import SidebarLayout from "@/layouts/components/sidebar";
 import Sidebar from "./sidebar";
+import { Suspense } from "react";
+import LoadingComponent from "@/components/loading";
 
 function AdminPage() {
     function toggleSidebar() {
@@ -19,7 +21,9 @@ function AdminPage() {
                     </SidebarLayout>
                 </div>
                 <div id="layoutSidenav_content" onClick={toggleSidebar}>
-                    <Outlet/>
+                    <Suspense fallback={<LoadingComponent/>}>
+                        <Outlet/>
+                    </Suspense>
                     <footer className="footer mt-auto footer-light">
                         <div className="container-fluid">
                             <div className="row">

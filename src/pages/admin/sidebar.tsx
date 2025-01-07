@@ -3,7 +3,7 @@ import { NavLink } from "react-router";
 
 function Sidebar() {
     return (
-        <div className="nav accordion">
+        <div className="nav">
             <div className="sidenav-menu-heading">Menu</div>
             <NavLink to={"/administrator"} className={"nav-link"} end>
                 <div className="nav-link-icon"><FiActivity/></div>
