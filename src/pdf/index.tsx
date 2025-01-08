@@ -11,7 +11,8 @@ function PDFDocument({children}: {children: React.ReactNode}) {
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            borderBottom: "2px solid #000"
+            borderBottom: "2px solid #000",
+            marginBottom: 15
         }}>
             <View style={{
                 width: "30%",
@@ -50,14 +51,16 @@ function PDFDocument({children}: {children: React.ReactNode}) {
     );
 
     return (
-        <PDFViewer style={{ width: "100%", height: "83vh" }}>
-            <Document>
-                <Page size={"A4"} style={{padding: 35, paddingTop: 10}}>
-                    <Header/>
-                    {children}
-                </Page>
-            </Document>
-        </PDFViewer>
+        <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
+            <PDFViewer style={{ width: "100%", height: "100%" }}>
+                <Document>
+                    <Page size={"A4"} style={{padding: 35, paddingTop: 10}}>
+                        <Header/>
+                        {children}
+                    </Page>
+                </Document>
+            </PDFViewer>
+        </div>
     );
 }
 

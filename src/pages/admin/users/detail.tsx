@@ -60,7 +60,7 @@ function UserDetail() {
                             <Button className="btn-teal mr-2" variant="icon" onClick={() => navigate(`/administrator/users/edit/${data?._id}`)}>
                                 <FiEdit/>
                             </Button>
-                            <Button className="btn-warning mr-2" variant="icon">
+                            <Button className="btn-warning mr-2" variant="icon" onClick={() => window.open(`${window.location.origin}/print/user/${data?._id}`, "_blank")}>
                                 <FiPrinter/>
                             </Button>
                             <Button className="btn-danger" variant="icon" onClick={handleDelete}>
