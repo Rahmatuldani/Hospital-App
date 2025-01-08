@@ -1,4 +1,5 @@
 import AdminPage from "@/pages/admin";
+import PDFDocument from "@/pdf";
 import { lazy } from "react";
 import { RouteObject } from "react-router";
 
@@ -31,6 +32,10 @@ const adminRouter: RouteObject = {
         {
             path: "users/edit/:id",
             element: <UserEdit/>
+        },
+        {
+            path: "users/print",
+            element: <PDFDocument/>
         }
     ]
 }
