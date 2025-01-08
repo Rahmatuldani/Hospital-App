@@ -14,7 +14,7 @@ function UserEdit() {
     const dummy: User[] = UserDummy
     const data = dummy.find(user => user._id === id)
 
-    const formSubmit: SubmitHandler<UserFormType> = (data) => {
+    const formSubmit: SubmitHandler<UserFormType> = () => {
         Swal.fire({
             title: "Success",
             icon: "success",

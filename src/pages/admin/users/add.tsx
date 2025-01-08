@@ -10,7 +10,7 @@ function UserAdd() {
     const {control, handleSubmit, formState: {errors}} = useForm<UserFormType>()
     const navigate = useNavigate()
 
-    const formSubmit: SubmitHandler<UserFormType> = (data) => {
+    const formSubmit: SubmitHandler<UserFormType> = () => {
         Swal.fire({
             title: "Success",
             icon: "success",
