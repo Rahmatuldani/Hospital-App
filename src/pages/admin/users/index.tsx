@@ -5,12 +5,19 @@ import { Breadcrumb, Button, Card, Container, Form, Row } from "react-bootstrap"
 import DataTable, { Alignment, TableColumn } from "react-data-table-component";
 import { FiUserPlus } from "react-icons/fi";
 import { useNavigate } from "react-router";
+import Profile from "@/assets/assets/img/illustrations/profiles/profile-1.png";
 
 function Users() {
     const [loading, setLoading] = useState<boolean>(true);
     const [filter, setFilter] = useState<string>("")
     const navigate = useNavigate();
     const columns: TableColumn<User>[] = [
+        {
+            name: "Photo",
+            cell: (row) => (
+                <img className="mx-auto my-3" src={Profile} alt={`${row.np}-img`} width={120}/>
+            )
+        },
         {
             name: "NP",
             selector: row => row.np,
@@ -21,6 +28,16 @@ function Users() {
             selector: row => row.firstName+" "+row.lastName,
             sortable: true
         },
+        {
+            name: "Email",
+            selector: row => row.email,
+            sortable: true
+        },
+        {
+            name: "Role",
+            selector: row => row.role,
+            sortable: true
+        }
     ]
     const data: User[] = UserDummy
     const filterUser = data.filter(user => user.np.includes(filter) || 

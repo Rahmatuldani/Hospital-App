@@ -142,7 +142,7 @@ function UserAdd() {
                                     />
                                 </Col>
                             </Row>
-                            <Row className="mb-3">
+                            <Row className="mb-5">
                                 <Col sm={6}>
                                     <Controller
                                         control={control}
@@ -174,7 +174,8 @@ function UserAdd() {
                                     />
                                 </Col>
                             </Row>
-                            <Button type="submit">Submit</Button>
+                            <Button type="submit" className="mr-2">Submit</Button>
+                            <Button type="button" variant="danger" onClick={() => navigate(-1)}>Cancel</Button>
                         </Form>
                     </Card.Body>
                 </Card>
