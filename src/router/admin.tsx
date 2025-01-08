@@ -5,6 +5,8 @@ import { RouteObject } from "react-router";
 const Dashboard = lazy(() => import("@/pages/admin/dashboard"))
 const Users = lazy(() => import("@/pages/admin/users"))
 const UserDetail = lazy(() => import("@/pages/admin/users/detail"))
+const UserAdd = lazy(() => import("@/pages/admin/users/add"))
+const UserEdit = lazy(() => import("@/pages/admin/users/edit"))
 
 const adminRouter: RouteObject = {
     path: "administrator",
@@ -21,6 +23,14 @@ const adminRouter: RouteObject = {
         {
             path: "users/detail/:id",
             element: <UserDetail/>
+        },
+        {
+            path: "users/add",
+            element: <UserAdd/>
+        },
+        {
+            path: "users/edit/:id",
+            element: <UserEdit/>
         }
     ]
 }

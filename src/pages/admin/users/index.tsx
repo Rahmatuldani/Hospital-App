@@ -1,16 +1,15 @@
-import LoadingComponent from "@/components/loading";
 import { UserDummy } from "@/data/user/dummy";
 import { User } from "@/data/user/types";
-import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
-import DataTable, { TableColumn } from "react-data-table-component";
-import { FiUsers } from "react-icons/fi";
-import UserDetail from "./detail";
-import { FaClipboardList } from "react-icons/fa";
-import { Link } from "react-router";
+import { ReactNode, useEffect, useState } from "react";
+import { Breadcrumb, Button, Card, Container, Form, Row } from "react-bootstrap";
+import DataTable, { Alignment, TableColumn } from "react-data-table-component";
+import { FiUserPlus } from "react-icons/fi";
+import { useNavigate } from "react-router";
 
 function Users() {
     const [loading, setLoading] = useState<boolean>(true);
+    const [filter, setFilter] = useState<string>("")
+    const navigate = useNavigate();
     const columns: TableColumn<User>[] = [
         {
             name: "NP",
@@ -22,24 +21,22 @@ function Users() {
             selector: row => row.firstName+" "+row.lastName,
             sortable: true
         },
-        {
-            name: "Action",
-            cell: (row) => (
-                <>
-                    <OverlayTrigger placement="top" overlay={
-                        <Tooltip id="user-detail">
-                            Detail
-                        </Tooltip>
-                    }>
-                        <Link to={`/administrator/users/detail/${row._id}`}>
-                            <Button variant="icon" className="btn-datatable btn-transparent-dark"><FaClipboardList/></Button>                        
-                        </Link>
-                    </OverlayTrigger>
-                </>
-            )
-        }
     ]
     const data: User[] = UserDummy
+    const filterUser = data.filter(user => user.np.includes(filter) || 
+                                        user.firstName.toLowerCase().includes(filter.toLowerCase()) ||
+                                        user.lastName.toLowerCase().includes(filter.toLowerCase()))
+
+    function tableSubHeader(): ReactNode {
+        return (
+            <Row className="w-100 d-flex mb-3">
+                <Form.Control className="mr-3" style={{ width: "300px" }} placeholder="Search" onChange={(e) => (setFilter(e.target.value))}/>
+                <Button className="btn-success" variant="icon" onClick={() => navigate('/administrator/users/add')}>
+                    <FiUserPlus/>
+                </Button>
+            </Row>
+        )
+    }
 
     useEffect(() => {
         setTimeout(() => {
@@ -49,33 +46,27 @@ function Users() {
 
     return (
         <main>
-            <header className="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-                <Container>
-                    <div className="page-header-content pt-4">
-                        <Row className="align-items-center justify-content-between">
-                            <Col xs={"auto"} className="mt-4">
-                                <h1 className="page-header-title">
-                                    <div className="page-header-icon"><FiUsers/></div>
-                                    Users
-                                </h1>
-                                <div className="page-header-subtitle">Example dashboard overview and content summary</div>
-                            </Col>
-                        </Row>
-                    </div>
-                </Container>
-            </header>
-            <Container className="mt-n10">
+            <Container className="mt-5">
+                <Breadcrumb>
+                    <Breadcrumb.Item active>User List</Breadcrumb.Item>
+                </Breadcrumb>
                 <Card>
-                    <Card.Body className="d-flex justify-content-center">
-                        {loading ? 
-                            <LoadingComponent/>
-                        :
-                            <DataTable
-                                columns={columns}
-                                data={data}
-                                className="datatable"
-                            />
-                        }
+                    <Card.Body>
+                        <DataTable
+                            columns={columns}
+                            data={filterUser}
+                            className="datatable"
+                            pagination
+                            highlightOnHover
+                            pointerOnHover
+                            onRowClicked={(row) => (navigate(`/administrator/users/detail/${row._id}`))}
+                            title="User List"
+                            progressPending={loading}
+                            subHeader
+                            subHeaderComponent={tableSubHeader()}
+                            subHeaderAlign={Alignment.LEFT}
+                            responsive
+                        />
                     </Card.Body>
                 </Card>
             </Container>
