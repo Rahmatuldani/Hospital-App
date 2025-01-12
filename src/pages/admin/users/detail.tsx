@@ -105,7 +105,7 @@ function UserDetail() {
                                         <Form.Group as={Row} controlId="birthPlace">
                                             <Form.Label column sm={2}>Birth Place</Form.Label>
                                             <Col sm={10}>
-                                                <Form.Control plaintext readOnly defaultValue={data?.email}/>
+                                                <Form.Control plaintext readOnly defaultValue={data?.birthPlace}/>
                                             </Col>
                                         </Form.Group>
                                         <Form.Group as={Row} controlId="gender">
