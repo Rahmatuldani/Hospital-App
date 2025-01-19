@@ -5,9 +5,11 @@ import NotFoundPage from "@/pages/errors/notFound";
 import adminRouter from "./admin";
 import UserPrint from "@/pages/admin/users/print";
 import PatientPrint from "@/pages/admin/patients/print";
+import receptionistRouter from "./receptionist";
 
 export const router = createBrowserRouter([
     adminRouter,
+    receptionistRouter,
     {
         path: "login",
         element: <LoginPage/>
