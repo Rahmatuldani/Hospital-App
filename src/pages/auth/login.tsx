@@ -1,4 +1,5 @@
 import AuthLayout from "@/layouts/auth";
+import { hash } from "@/lib/encryption";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
@@ -10,8 +11,8 @@ type LoginForm = {
 function LoginPage() {
     const { control, handleSubmit, formState: {errors} } = useForm<LoginForm>()
 
-    const formSubmit: SubmitHandler<LoginForm> = (data) => {
-        console.log(data);
+    const formSubmit: SubmitHandler<LoginForm> = async (data) => {
+        console.log(await hash(JSON.stringify(data)));
     }
 
     return (
