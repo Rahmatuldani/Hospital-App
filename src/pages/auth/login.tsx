@@ -1,3 +1,4 @@
+import AuthApi from "@/api/auth";
 import AuthLayout from "@/layouts/auth";
 import { hash } from "@/lib/encryption";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
@@ -12,7 +13,9 @@ function LoginPage() {
     const { control, handleSubmit, formState: {errors} } = useForm<LoginForm>()
 
     const formSubmit: SubmitHandler<LoginForm> = async (data) => {
-        console.log(await hash(JSON.stringify(data)));
+        const body = await hash(JSON.stringify(data));
+        await AuthApi.login(body)
+
     }
 
     return (

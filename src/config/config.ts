@@ -5,6 +5,7 @@ type CONFIG = {
         author: string;
     };
     secretKey: string;
+    serverUrl: string;
 
     hospitalName: string;
     hospitalSlug: string;
@@ -19,6 +20,7 @@ export const config: CONFIG = {
         author: import.meta.env.VITE_APP_META_AUTHOR || undefined,
     },
     secretKey: import.meta.env.VITE_APP_SECRET_KEY || undefined,
+    serverUrl: import.meta.env.VITE_APP_SERVER_URL || undefined,
 
     hospitalName: import.meta.env.VITE_APP_HOSPITAL_NAME || undefined,
     hospitalSlug: import.meta.env.VITE_APP_HOSPITAL_SLUG || undefined,
