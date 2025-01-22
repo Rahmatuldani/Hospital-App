@@ -1,0 +1,27 @@
+{
+    "address": "Address",
+    
+    "birth_place_date": "Place and Date of Birth",
+    "blood_type": "Blood Type",
+
+    "dashboard": "Dashboard",
+    
+    "gender": "Gender",
+    
+    "job": "Job",
+    
+    "medical_record": "Medical Record",
+
+    "name": "Name",
+    
+    "partner": "Partner",
+    "partner_phone": "Partner Phone",
+    "partner_address": "Partner Address",
+    "patient": "Patient",
+    "patient_list": "Patient List",
+    "patient_detail": "Patient Detail",
+    "patient_phone": "Patient Phone",
+    "payment_method": "Payment Method",
+    
+    "religion": "Religion"
+}

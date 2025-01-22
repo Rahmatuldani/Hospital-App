@@ -32,6 +32,7 @@ export type Patient = {
     address: string;
     bloodType: BloodType | null;
     paymentMethod: PaymentMethod;
+    bpjs: string | null;
     job: string;
     partner: string;
     patientPhone: string;
