@@ -6,6 +6,7 @@ const Dashboard = lazy(() => import("@/pages/receptionist/dashboard"))
 
 const Patients = lazy(() => import("@/pages/receptionist/patient"))
 const PatientAdd = lazy(() => import("@/pages/receptionist/patient/add"))
+const PatientDetail = lazy(() => import("@/pages/receptionist/patient/detail"))
 
 const receptionistRouter: RouteObject = {
     path: "receptionist",
@@ -22,7 +23,11 @@ const receptionistRouter: RouteObject = {
         {
             path: "patients/add",
             element: <PatientAdd/>
-        }
+        },
+        {
+            path: "patients/detail/:id",
+            element: <PatientDetail/>
+        },
     ]
 }
 

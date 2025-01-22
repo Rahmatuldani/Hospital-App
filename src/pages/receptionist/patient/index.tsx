@@ -17,7 +17,7 @@ function PatientPage() {
 
     const columns: TableColumn<Patient>[] = [
         {
-            name: "Rekam Medis",
+            name: `${t('medical_record')}`,
             selector: row => row.medicalRecord,
             sortable: true
         },
@@ -27,12 +27,12 @@ function PatientPage() {
             sortable: true
         },
         {
-            name: "Nama",
+            name: `${t('name')}`,
             selector: row => row.name,
             sortable: true
         },
         {
-            name: "Tempat / Tanggal Lahir",
+            name: `${t('birth_place_date')}`,
             selector: row => `${row.birthPlace} / ${readableDate(row.birthDate)}`,
             sortable: true
         }
@@ -60,7 +60,7 @@ function PatientPage() {
         <main>
             <Container className="mt-5">
                 <Breadcrumb>
-                    <Breadcrumb.Item active>{t("patient_list_card_title")}</Breadcrumb.Item>
+                    <Breadcrumb.Item active>{t("patient_list")}</Breadcrumb.Item>
                 </Breadcrumb>
                 <Card>
                     <Card.Body>
@@ -72,7 +72,7 @@ function PatientPage() {
                             highlightOnHover
                             pointerOnHover
                             onRowClicked={(row) => (navigate(`/receptionist/patients/detail/${row._id}`))}
-                            title={t("patient_list_card_title")}
+                            title={t("patient_list")}
                             progressPending={loading}
                             subHeader
                             subHeaderComponent={tableSubHeader()}

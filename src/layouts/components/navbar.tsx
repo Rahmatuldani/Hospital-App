@@ -4,10 +4,13 @@ import DefaultPicture from "@/assets/assets/img/illustrations/profiles/profile-1
 import Flag from "react-flagkit";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router";
 
 function NavbarLayout() {
     const { i18n } = useTranslation();
     const [flag, setFlag] = useState<string>(i18n.language)
+    const navigate = useNavigate()
+
     function toggleSidebar() {
         document.body.classList.toggle("sidenav-toggled")
     }
@@ -15,6 +18,10 @@ function NavbarLayout() {
     function changeLang(lang: string) {
         setFlag(lang);
         i18n.changeLanguage(lang)
+    }
+
+    function handleLogout() {
+        navigate("/")
     }
 
     return (
@@ -90,7 +97,7 @@ function NavbarLayout() {
                             <div className="dropdown-item-icon"><FiSettings/></div>
                             Account
                         </Dropdown.Item>
-                        <Dropdown.Item>
+                        <Dropdown.Item onClick={handleLogout}>
                             <div className="dropdown-item-icon"><FiLogOut/></div>
                             Logout
                         </Dropdown.Item>
