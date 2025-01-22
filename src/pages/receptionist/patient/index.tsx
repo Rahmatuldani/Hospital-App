@@ -4,6 +4,7 @@ import { readableDate } from "@/lib/convert";
 import { ReactNode, useEffect, useState } from "react";
 import { Breadcrumb, Button, Card, Container, Form, Row } from "react-bootstrap";
 import DataTable, { Alignment, TableColumn } from "react-data-table-component";
+import { useTranslation } from "react-i18next";
 import { FiUserPlus } from "react-icons/fi";
 import { useNavigate } from "react-router";
 
@@ -12,6 +13,7 @@ function PatientPage() {
     const [filter, setFilter] = useState<string>("")
     const navigate = useNavigate()
     const data: Patient[] = PatientDummy
+    const { t } = useTranslation();
 
     const columns: TableColumn<Patient>[] = [
         {
@@ -58,7 +60,7 @@ function PatientPage() {
         <main>
             <Container className="mt-5">
                 <Breadcrumb>
-                    <Breadcrumb.Item active>Daftar Pasien</Breadcrumb.Item>
+                    <Breadcrumb.Item active>{t("patient_list_card_title")}</Breadcrumb.Item>
                 </Breadcrumb>
                 <Card>
                     <Card.Body>
@@ -70,7 +72,7 @@ function PatientPage() {
                             highlightOnHover
                             pointerOnHover
                             onRowClicked={(row) => (navigate(`/receptionist/patients/detail/${row._id}`))}
-                            title="Daftar Pasien"
+                            title={t("patient_list_card_title")}
                             progressPending={loading}
                             subHeader
                             subHeaderComponent={tableSubHeader()}

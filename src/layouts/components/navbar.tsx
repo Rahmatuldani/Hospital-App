@@ -1,10 +1,20 @@
 import { Button, Dropdown, Nav, Navbar } from "react-bootstrap";
 import { FiActivity, FiBell, FiLogOut, FiMail, FiMenu, FiSettings } from "react-icons/fi";
 import DefaultPicture from "@/assets/assets/img/illustrations/profiles/profile-1.png";
+import Flag from "react-flagkit";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 function NavbarLayout() {
+    const { i18n } = useTranslation();
+    const [flag, setFlag] = useState<string>(i18n.language)
     function toggleSidebar() {
         document.body.classList.toggle("sidenav-toggled")
+    }
+
+    function changeLang(lang: string) {
+        setFlag(lang);
+        i18n.changeLanguage(lang)
     }
 
     return (
@@ -14,6 +24,21 @@ function NavbarLayout() {
                 <FiMenu/>
             </Button>
             <Nav className="align-items-center ml-auto">
+                <Dropdown className="nav-item no-caret mr-3 mr-lg-0 dropdown-user">
+                    <Dropdown.Toggle variant="icon" className="btn-transparent-dark">
+                        <Flag country={flag.toUpperCase()} size={16}/>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className="dropdown-menu-right border-0 shadow animated--fade-in-up" style={{ minWidth: "fit-content" }}>
+                        <Dropdown.Item onClick={() => changeLang('id')}>
+                            <div className="dropdown-item-icon"><Flag country="ID" size={16}/></div>
+                            ID
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={() => changeLang('gb')}>
+                            <div className="dropdown-item-icon"><Flag country="GB" size={16}/></div>
+                            EN
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
                 <Dropdown className="nav-item no-caret d-none d-sm-block mr-3 dropdown-notifications">
                     <Dropdown.Toggle className="btn-transparent-dark" variant="icon"><FiBell/></Dropdown.Toggle>
                     <Dropdown.Menu className="dropdown-menu-right border-0 shadow animated--fade-in-up">
