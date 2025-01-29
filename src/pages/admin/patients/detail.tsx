@@ -6,12 +6,12 @@ import { readableDate } from "@/lib/convert";
 import { FiEdit, FiPrinter, FiTrash2 } from "react-icons/fi";
 import Swal from "sweetalert2";
 import { Patient } from "@/data/patient/types";
-import { PatientDummy } from "@/data/patient/dummy";
+import { PatientsDummy } from "@/data/patient/dummy";
 
 function PatientDetail() {
     const { id } = useParams()
     const [loading, setLoading] = useState<boolean>(true)
-    const dummy: Patient[] = PatientDummy;
+    const dummy: Patient[] = PatientsDummy;
     const [data, setData] = useState<Patient | undefined>(undefined)
     const navigate = useNavigate()
 

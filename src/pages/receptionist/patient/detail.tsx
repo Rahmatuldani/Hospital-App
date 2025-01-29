@@ -1,43 +1,21 @@
 import LoadingComponent from "@/components/loading";
 import { useEffect, useState } from "react";
 import { Breadcrumb, Button, Card, Col, Container, Form, Row } from "react-bootstrap";
-import { NavLink, useNavigate, useParams } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { readableDate } from "@/lib/convert";
 import { FiEdit, FiPrinter, FiTrash2 } from "react-icons/fi";
 import Swal from "sweetalert2";
-import { BloodType, Patient, PaymentMethod, Religion } from "@/data/patient/types";
+import { Patient } from "@/data/patient/types";
 import { useTranslation } from "react-i18next";
-import { faker } from "@faker-js/faker";
-import { Gender } from "@/data/user/types";
+import { PatientDummy } from "@/data/patient/dummy";
 
 function PatientDetail() {
-    const { id } = useParams()
+    // const { id } = useParams()
     const [loading, setLoading] = useState<boolean>(true)
     const [data, setData] = useState<Patient | undefined>(undefined)
     const navigate = useNavigate()
     const { t } = useTranslation();
-    const patient: Patient = {
-        _id: id || faker.database.mongodbObjectId(),
-        medicalRecord: faker.string.numeric(10),
-        nik: faker.string.numeric(16),
-        name: faker.person.fullName(),
-        gender: faker.helpers.arrayElement(Object.values(Gender)),
-        birthDate: faker.date.birthdate(),
-        birthPlace: faker.location.city(),
-        address: faker.location.streetAddress(),
-        bloodType: faker.helpers.arrayElement(Object.values(BloodType)),
-        paymentMethod: faker.helpers.arrayElement(Object.values(PaymentMethod)),
-        bpjs: faker.string.numeric(20),
-        job: faker.person.jobTitle(),
-        partner: faker.person.fullName(),
-        patientPhone: faker.phone.number(),
-        partnerPhone: faker.phone.number(),
-        partnerAddress: faker.location.streetAddress(),
-        religion: faker.helpers.arrayElement(Object.values(Religion)),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        deletedAt: null,
-    }
+    const patient: Patient = PatientDummy
 
     function handleDelete() {
         Swal.fire({
@@ -95,6 +73,12 @@ function PatientDetail() {
                             <LoadingComponent/>
                         :
                             <Form>
+                                <Form.Group as={Row} controlId="nik">
+                                    <Form.Label column sm={3}>NIK</Form.Label>
+                                    <Col sm={9}>
+                                        <Form.Control plaintext readOnly defaultValue={data?.nik}/>
+                                    </Col>
+                                </Form.Group>
                                 <Form.Group as={Row} controlId="medical-record">
                                     <Form.Label column sm={3}>{t('medical_record')}</Form.Label>
                                     <Col sm={9}>
@@ -114,7 +98,7 @@ function PatientDetail() {
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Row} controlId="gender">
-                                    <Form.Label column sm={3}>{t('gender')}</Form.Label>
+                                    <Form.Label column sm={3}>{t('gender.info')}</Form.Label>
                                     <Col sm={9}>
                                         <Form.Control plaintext readOnly defaultValue={data?.gender}/>
                                     </Col>

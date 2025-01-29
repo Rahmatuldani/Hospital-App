@@ -1,4 +1,4 @@
-import { PatientDummy } from "@/data/patient/dummy";
+import { PatientsDummy } from "@/data/patient/dummy";
 import { Patient } from "@/data/patient/types";
 import { readableDate } from "@/lib/convert";
 import { ReactNode, useEffect, useState } from "react";
@@ -12,7 +12,7 @@ function PatientPage() {
     const [loading, setLoading] = useState<boolean>(true)
     const [filter, setFilter] = useState<string>("")
     const navigate = useNavigate()
-    const data: Patient[] = PatientDummy
+    const data: Patient[] = PatientsDummy
     const { t } = useTranslation();
 
     const columns: TableColumn<Patient>[] = [
