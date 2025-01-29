@@ -1,26 +1,32 @@
+import PatientApi from "@/api/patient";
 import { BloodType, Patient, PaymentMethod, Religion } from "@/data/patient/types";
 import { Gender } from "@/data/user/types";
 import { Breadcrumb, Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { NavLink, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 function PatientAdd() {
     const {control, handleSubmit, formState: {errors}} = useForm<Patient>()
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
-    const formSubmit: SubmitHandler<Patient> = (data) => {
-        console.log(data);
+    const formSubmit: SubmitHandler<Patient> = async (data) => {
+        const patient: Patient | null = await PatientApi.createPatient(data)
+        console.log(patient);
         
-        Swal.fire({
-            title: "Sukses",
-            icon: "success",
-            text: "Tambah pasien baru berhasil"
-        }).then(response => {
-            if (response.isConfirmed) {
-                navigate('/receptionist/patients')
-            }
-        })
+        if (patient) {
+            Swal.fire({
+                title: t('alert_title.success'),
+                icon: "success",
+                text: t('alert_message.success.add_patient')
+            }).then(response => {
+                if (response.isConfirmed) {
+                    navigate(`/receptionist/patients/detail/${patient._id}`)
+                }
+            })
+        }
     }
 
     return (

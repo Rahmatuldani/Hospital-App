@@ -1,6 +1,6 @@
-import { PatientsDummy } from "@/data/patient/dummy";
+import PatientApi from "@/api/patient";
 import { Patient } from "@/data/patient/types";
-import { readableDate } from "@/lib/convert";
+import { readableDate, truncateString } from "@/lib/convert";
 import { ReactNode, useEffect, useState } from "react";
 import { Breadcrumb, Button, Card, Container, Form, Row } from "react-bootstrap";
 import DataTable, { Alignment, TableColumn } from "react-data-table-component";
@@ -11,33 +11,37 @@ import { useNavigate } from "react-router";
 function PatientPage() {
     const [loading, setLoading] = useState<boolean>(true)
     const [filter, setFilter] = useState<string>("")
+    const [patients, setPatients] = useState<Patient[]>([]) 
     const navigate = useNavigate()
-    const data: Patient[] = PatientsDummy
     const { t } = useTranslation();
 
     const columns: TableColumn<Patient>[] = [
         {
             name: `${t('medical_record')}`,
             selector: row => row.medicalRecord,
+            grow: 1,
             sortable: true
         },
         {
             name: "BPJS",
             selector: row => row.bpjs || "-",
+            grow: 1,
             sortable: true
         },
         {
             name: `${t('name')}`,
-            selector: row => row.name,
+            selector: row => truncateString(row.name, 20),
+            grow: 2,
             sortable: true
         },
         {
             name: `${t('birth_place_date')}`,
-            selector: row => `${row.birthPlace} / ${readableDate(row.birthDate)}`,
+            selector: row => `${truncateString(row.birthPlace, 20)} / ${readableDate(new Date(row.birthDate))}`,
+            grow: 2,
             sortable: true
         }
     ]
-    const filterPatient = data.filter(patient => patient.name.toLowerCase().includes(filter.toLowerCase()) ||
+    const filterPatient = patients.filter(patient => patient.name.toLowerCase().includes(filter.toLowerCase()) ||
                                                 patient.medicalRecord.includes(filter))
     
     function tableSubHeader(): ReactNode {
@@ -52,9 +56,12 @@ function PatientPage() {
     }
 
     useEffect(() => {
-        setTimeout(() => {
+        async function initiate() {
+            setPatients(await PatientApi.getAllPatients())
             setLoading(false)
-        }, 1000);
+        }
+
+        initiate()
     }, [])
     return (
         <main>

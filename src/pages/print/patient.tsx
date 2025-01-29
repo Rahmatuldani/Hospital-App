@@ -1,12 +1,21 @@
+import PatientApi from "@/api/patient";
 import PDFHeader from "@/components/pdf/header";
-import { PatientDummy } from "@/data/patient/dummy";
+import { Patient } from "@/data/patient/types";
 import { Document, Page, PDFViewer, Text, View } from "@react-pdf/renderer";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 function PatientPrint() {
     const { id } = useParams()
-    const dummy = PatientDummy
-    const data = dummy.find(patient => patient._id === id)
+    const [patient, setPatient] = useState<Patient | undefined>(undefined)
+
+    useEffect(() => {
+        async function initiate() {
+            const response = await PatientApi.getPatient(id ?? "")
+            await setPatient(response)
+        }
+        initiate()
+    }, [])
 
     return (
         <div style={{ width: '100vw', height: '100vh', overflow: 'hidden' }}>
@@ -21,10 +30,10 @@ function PatientPrint() {
                             <Text>Patient Detail</Text>
                         </View>
                         <View>
-                            <Text>Medical Record: {data?.medicalRecord}</Text>
+                            <Text>Medical Record: {patient?.medicalRecord}</Text>
                         </View>
                         <View>
-                            <Text>Name: {data?.name}</Text>
+                            <Text>Name: {patient?.name}</Text>
                         </View>
                     </Page>
                 </Document>
