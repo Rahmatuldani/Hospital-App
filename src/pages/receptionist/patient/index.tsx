@@ -19,25 +19,21 @@ function PatientPage() {
         {
             name: `${t('medical_record')}`,
             selector: row => row.medicalRecord,
-            grow: 1,
             sortable: true
         },
         {
             name: "BPJS",
             selector: row => row.bpjs || "-",
-            grow: 1,
             sortable: true
         },
         {
             name: `${t('name')}`,
             selector: row => truncateString(row.name, 20),
-            grow: 2,
             sortable: true
         },
         {
             name: `${t('birth_place_date')}`,
             selector: row => `${truncateString(row.birthPlace, 20)} / ${readableDate(new Date(row.birthDate))}`,
-            grow: 2,
             sortable: true
         }
     ]
