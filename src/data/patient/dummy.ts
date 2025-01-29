@@ -1,7 +1,8 @@
+import { faker } from "@faker-js/faker";
 import { Gender } from "../user/types";
 import { BloodType, Patient, PaymentMethod, Religion } from "./types";
 
-export const PatientDummy: Patient[] = [
+export const PatientsDummy: Patient[] = [
     {
         _id: "677f3409fc13ae165e7955cb",
         medicalRecord: "9003689350",
@@ -223,3 +224,26 @@ export const PatientDummy: Patient[] = [
         deletedAt: null
     }
 ]
+
+export const PatientDummy: Patient = {
+    _id: faker.database.mongodbObjectId(),
+    medicalRecord: faker.string.numeric(10),
+    nik: faker.string.numeric(16),
+    name: faker.person.fullName(),
+    gender: faker.helpers.arrayElement(Object.values(Gender)),
+    birthDate: faker.date.birthdate(),
+    birthPlace: faker.location.city(),
+    address: faker.location.streetAddress(),
+    bloodType: faker.helpers.arrayElement(Object.values(BloodType)),
+    paymentMethod: faker.helpers.arrayElement(Object.values(PaymentMethod)),
+    bpjs: faker.string.numeric(20),
+    job: faker.person.jobTitle(),
+    partner: faker.person.fullName(),
+    patientPhone: faker.phone.number({ style: 'national' }),
+    partnerPhone: faker.phone.number({ style: 'national' }),
+    partnerAddress: faker.location.streetAddress(),
+    religion: faker.helpers.arrayElement(Object.values(Religion)),
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    deletedAt: null,
+}

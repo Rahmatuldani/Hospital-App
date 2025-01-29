@@ -1,23 +1,11 @@
 {
     "address": "Alamat",
-    "alert_delete": "Apakah kamu yakin ingin menghapus",
-    "alert_delete_success": "Data berhasil dihapus",
-
     "birth_place_date": "Tempat/Tanggal Lahir",
     "blood_type": "Gol. Darah",
-    
     "dashboard": "Dashboard",
-    "delete": "Hapus",
-    "deleted": "Terhapus",
-
-    "gender": "Jenis Kelamin",
-
     "job": "Pekerjaan",
-    
     "medical_record": "No. Rekam Medis",
-    
     "name": "Nama",
-    
     "partner": "Wali",
     "partner_address": "Alamat Wali",
     "partner_phone": "No. Telp Wali",
@@ -26,6 +14,36 @@
     "patient_detail": "Detail Pasien",
     "payment_method": "Metode Pembayaran",
     "patient_phone": "No. Telp Pasien",
-    
-    "religion": "Agama"
+    "religion": "Agama",
+    "patient_edit": "Edit Pasien",
+    "validation": {
+        "required": "Mohon isi data ini",
+        "phone": "Nomor telepon tidak valid",
+        "nik": "Nomor nik tidak valid"
+    },
+    "alert_title": {
+        "success": "Sukses",
+        "error": "Error",
+        "failed": "Gagal",
+        "delete": "Hapus",
+        "deleted": "Terhapus"
+    },
+    "alert_message": {
+        "delete": "Apakah kamu yakin ingin menghapus",
+        "success": {
+            "add_patient": "Tambah pasien baru sukses",
+            "edit_patient": "Edit data pasien sukses",
+            "delete": "Data berhasil dihapus"
+        }
+    },
+    "birth_place": "Tempat lahir",
+    "birth_date": "Tanggal lahir",
+    "gender": {
+        "info": "Jenis Kelamin",
+        "male": "Laki-laki",
+        "female": "Perempuan"
+    },
+    "unknown": "Tidak diketahui",
+    "submit": "Kirim",
+    "cancel": "Batal"
 }

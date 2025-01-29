@@ -8,12 +8,13 @@ export type ResponseType = {
 }
 
 export function ErrorResponse(error: unknown) {
+    console.error(error);
     if (error instanceof AxiosError) {
-        console.error(error);
         if (error.code === "ERR_NETWORK") {
             return Swal.fire({
                 icon: "error",
-                title: error.message
+                title: error.message,
+                text: "Failed to connect to server"
             })
         }
         return Swal.fire({

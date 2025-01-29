@@ -4,7 +4,7 @@ import LoginPage from "@/pages/auth/login";
 import NotFoundPage from "@/pages/errors/notFound";
 import adminRouter from "./admin";
 import UserPrint from "@/pages/admin/users/print";
-import PatientPrint from "@/pages/admin/patients/print";
+import PatientPrint from "@/pages/print/patient";
 import receptionistRouter from "./receptionist";
 
 export const router = createBrowserRouter([
