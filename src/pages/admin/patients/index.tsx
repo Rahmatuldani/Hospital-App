@@ -1,4 +1,4 @@
-import { PatientDummy } from "@/data/patient/dummy";
+import { PatientsDummy } from "@/data/patient/dummy";
 import { Patient } from "@/data/patient/types";
 import { ReactNode, useEffect, useState } from "react";
 import { Breadcrumb, Button, Card, Container, Form, Row } from "react-bootstrap";
@@ -10,7 +10,7 @@ function Patients() {
     const [loading, setLoading] = useState<boolean>(true)
     const [filter, setFilter] = useState<string>("")
     const navigate = useNavigate()
-    const data: Patient[] = PatientDummy
+    const data: Patient[] = PatientsDummy
 
     const columns: TableColumn<Patient>[] = [
         {
